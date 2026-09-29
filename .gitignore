@@ -1,0 +1,7 @@
+build/
+build_out.txt
+tools/power_monitor/__pycache__
+tools/power_monitor/runs
+ThirdpartySDK/*
+.DS_Store
+build_out.txt

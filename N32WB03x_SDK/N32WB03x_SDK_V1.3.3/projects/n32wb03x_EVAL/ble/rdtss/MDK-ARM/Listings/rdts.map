@@ -1,0 +1,1299 @@
+Component: ARM Compiler 5.06 update 7 (build 960) Tool: armlink [4d3601]
+
+==============================================================================
+
+Section Cross References
+
+    startup_n32wb03x.o(RESET) refers to startup_n32wb03x.o(STACK) for __initial_sp
+    startup_n32wb03x.o(RESET) refers to startup_n32wb03x.o(.text) for Reset_Handler
+    startup_n32wb03x.o(RESET) refers to app_usart.o(i.DMA_Channel1_2_3_4_IRQHandler) for DMA_Channel1_2_3_4_IRQHandler
+    startup_n32wb03x.o(RESET) refers to app_usart.o(i.USART1_IRQHandler) for USART1_IRQHandler
+    startup_n32wb03x.o(.text) refers to system_n32wb03x.o(i.SystemInit) for SystemInit
+    startup_n32wb03x.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    system_n32wb03x.o(i.SystemCoreClockUpdate) refers to system_n32wb03x.o(.data) for .data
+    system_n32wb03x.o(i.SystemGetMacAddr) refers to system_n32wb03x.o(i.SystemTrimValueRead) for SystemTrimValueRead
+    system_n32wb03x.o(i.SystemGetMacAddr) refers to system_n32wb03x.o(.bss) for .bss
+    system_n32wb03x.o(i.SystemGetUUID) refers to system_n32wb03x.o(i.SystemTrimValueRead) for SystemTrimValueRead
+    system_n32wb03x.o(i.SystemGetUUID) refers to system_n32wb03x.o(.bss) for .bss
+    system_n32wb03x.o(i.SystemInit) refers to system_n32wb03x.o(i.SystemTrimValueRead) for SystemTrimValueRead
+    system_n32wb03x.o(i.SystemInit) refers to system_n32wb03x.o(.bss) for .bss
+    system_n32wb03x.o(i.SystemTrimValueGet) refers to system_n32wb03x.o(i.SystemTrimValueRead) for SystemTrimValueRead
+    system_n32wb03x.o(i.SystemTrimValueGet) refers to system_n32wb03x.o(.bss) for .bss
+    system_n32wb03x.o(i.SystemTrimValueRead) refers to memcpya.o(.text) for __aeabi_memcpy
+    system_n32wb03x.o(i.SystemTrimValueRead) refers to system_n32wb03x.o(.constdata) for .constdata
+    n32wb03x_adc.o(i.ADC16Bit_ConverValueToVoltage) refers to system_n32wb03x.o(i.SystemTrimValueGet) for SystemTrimValueGet
+    n32wb03x_adc.o(i.ADC16Bit_ConverValueToVoltage) refers to idiv.o(.text) for __aeabi_idivmod
+    n32wb03x_adc.o(i.ADC_ConverValueToTemperature) refers to system_n32wb03x.o(i.SystemTrimValueGet) for SystemTrimValueGet
+    n32wb03x_adc.o(i.ADC_ConverValueToTemperature) refers to ffltui.o(.text) for __aeabi_ui2f
+    n32wb03x_adc.o(i.ADC_ConverValueToTemperature) refers to fadd.o(.text) for __aeabi_frsub
+    n32wb03x_adc.o(i.ADC_ConverValueToTemperature) refers to f2d.o(.text) for __aeabi_f2d
+    n32wb03x_adc.o(i.ADC_ConverValueToTemperature) refers to ddiv.o(.text) for __aeabi_ddiv
+    n32wb03x_adc.o(i.ADC_ConverValueToTemperature) refers to dadd.o(.text) for __aeabi_dadd
+    n32wb03x_adc.o(i.ADC_ConverValueToTemperature) refers to d2f.o(.text) for __aeabi_d2f
+    n32wb03x_adc.o(i.ADC_ConverValueToVoltage) refers to system_n32wb03x.o(i.SystemTrimValueGet) for SystemTrimValueGet
+    n32wb03x_adc.o(i.ADC_ConverValueToVoltage) refers to idiv.o(.text) for __aeabi_idivmod
+    n32wb03x_adc.o(i.ADC_DeInit) refers to n32wb03x_rcc.o(i.RCC_EnableAHBPeriphReset) for RCC_EnableAHBPeriphReset
+    n32wb03x_adc.o(i.ADC_DeInit) refers to n32wb03x_rcc.o(i.RCC_EnableAHBPeriphClk) for RCC_EnableAHBPeriphClk
+    n32wb03x_gpio.o(i.GPIO_AFIOInitDefault) refers to n32wb03x_rcc.o(i.RCC_EnableAPB2PeriphReset) for RCC_EnableAPB2PeriphReset
+    n32wb03x_gpio.o(i.GPIO_DeInit) refers to n32wb03x_rcc.o(i.RCC_EnableAPB2PeriphReset) for RCC_EnableAPB2PeriphReset
+    n32wb03x_rcc.o(i.RCC_GetClocksFreqValue) refers to n32wb03x_rcc.o(.constdata) for .constdata
+    n32wb03x_rcc.o(i.RCC_WaitHseStable) refers to n32wb03x_rcc.o(i.RCC_GetFlagStatus) for RCC_GetFlagStatus
+    n32wb03x_rcc.o(i.RCC_WaitHsiStable) refers to n32wb03x_rcc.o(i.RCC_GetFlagStatus) for RCC_GetFlagStatus
+    n32wb03x_tim.o(i.TIM_ConfigExtTrigAsClk) refers to n32wb03x_tim.o(i.ConfigTI1) for ConfigTI1
+    n32wb03x_tim.o(i.TIM_ConfigExtTrigAsClk) refers to n32wb03x_tim.o(i.ConfigTI2) for ConfigTI2
+    n32wb03x_tim.o(i.TIM_ConfigPwmIc) refers to n32wb03x_tim.o(i.ConfigTI2) for ConfigTI2
+    n32wb03x_tim.o(i.TIM_ConfigPwmIc) refers to n32wb03x_tim.o(i.ConfigTI1) for ConfigTI1
+    n32wb03x_tim.o(i.TIM_DeInit) refers to n32wb03x_rcc.o(i.RCC_EnableAPB2PeriphReset) for RCC_EnableAPB2PeriphReset
+    n32wb03x_tim.o(i.TIM_DeInit) refers to n32wb03x_rcc.o(i.RCC_EnableAPB1PeriphReset) for RCC_EnableAPB1PeriphReset
+    n32wb03x_tim.o(i.TIM_ICInit) refers to n32wb03x_tim.o(i.ConfigTI1) for ConfigTI1
+    n32wb03x_tim.o(i.TIM_ICInit) refers to n32wb03x_tim.o(i.ConfigTI2) for ConfigTI2
+    n32wb03x_usart.o(i.USART_DeInit) refers to n32wb03x_rcc.o(i.RCC_EnableAPB2PeriphReset) for RCC_EnableAPB2PeriphReset
+    n32wb03x_usart.o(i.USART_DeInit) refers to n32wb03x_rcc.o(i.RCC_EnableAPB1PeriphReset) for RCC_EnableAPB1PeriphReset
+    n32wb03x_usart.o(i.USART_Init) refers to n32wb03x_rcc.o(i.RCC_GetClocksFreqValue) for RCC_GetClocksFreqValue
+    n32wb03x_usart.o(i.USART_Init) refers to uidiv.o(.text) for __aeabi_uidivmod
+    n32wb03x_spi.o(i.I2S_Init) refers to n32wb03x_rcc.o(i.RCC_GetClocksFreqValue) for RCC_GetClocksFreqValue
+    n32wb03x_spi.o(i.I2S_Init) refers to uidiv.o(.text) for __aeabi_uidivmod
+    n32wb03x_spi.o(i.SPI_I2S_DeInit) refers to n32wb03x_rcc.o(i.RCC_EnableAPB2PeriphReset) for RCC_EnableAPB2PeriphReset
+    n32wb03x_lpuart.o(i.LPUART_Init) refers to n32wb03x_rcc.o(i.RCC_GetLpuartClkSrc) for RCC_GetLpuartClkSrc
+    n32wb03x_lpuart.o(i.LPUART_Init) refers to n32wb03x_rcc.o(i.RCC_GetClocksFreqValue) for RCC_GetClocksFreqValue
+    n32wb03x_lpuart.o(i.LPUART_Init) refers to uidiv.o(.text) for __aeabi_uidivmod
+    n32wb03x_qflash.o(i.OTPTrim_Erase) refers to memcpya.o(.text) for __aeabi_memcpy
+    n32wb03x_qflash.o(i.OTPTrim_Erase) refers to n32wb03x_qflash.o(.constdata) for .constdata
+    n32wb03x_qflash.o(i.OTPTrim_Lock) refers to memcpya.o(.text) for __aeabi_memcpy
+    n32wb03x_qflash.o(i.OTPTrim_Lock) refers to n32wb03x_qflash.o(.constdata) for .constdata
+    n32wb03x_qflash.o(i.OTPTrim_Read) refers to memcpya.o(.text) for __aeabi_memcpy
+    n32wb03x_qflash.o(i.OTPTrim_Read) refers to system_n32wb03x.o(.constdata) for TRIM_READ_CMD_CODE
+    n32wb03x_qflash.o(i.OTPTrim_Write) refers to memcpya.o(.text) for __aeabi_memcpy
+    n32wb03x_qflash.o(i.OTPTrim_Write) refers to n32wb03x_qflash.o(.constdata) for .constdata
+    n32wb03x_qflash.o(i.Qflash_Erase_Sector) refers to n32wb03x_qflash.o(.data) for .data
+    n32wb03x_qflash.o(i.Qflash_Init) refers to memcpya.o(.text) for __aeabi_memcpy
+    n32wb03x_qflash.o(i.Qflash_Init) refers to n32wb03x_qflash.o(.bss) for .bss
+    n32wb03x_qflash.o(i.Qflash_Init) refers to n32wb03x_qflash.o(.data) for .data
+    n32wb03x_qflash.o(i.Qflash_Init) refers to n32wb03x_qflash.o(.constdata) for .constdata
+    n32wb03x_qflash.o(i.Qflash_Read) refers to n32wb03x_qflash.o(.data) for .data
+    n32wb03x_qflash.o(i.Qflash_Write) refers to n32wb03x_qflash.o(.data) for .data
+    lib_att.o(i.attm_att_set_value) refers to memcpya.o(.text) for __aeabi_memcpy
+    rwip.o(i.rwip_init) refers to rwip_driver.o(i.llhwc_phy_prerx_flash) for llhwc_phy_prerx_flash
+    rwip_driver.o(i.llhwc_modem_setmode) refers to rwip_driver.o(i.llhwc_setmode_reg_config) for llhwc_setmode_reg_config
+    rwip_driver.o(i.llhwc_modem_setmode) refers to rwip_driver.o(.data) for .data
+    rwip_driver.o(i.llhwc_phy_prerx_flash) refers to rwip_driver.o(i.llhwc_setmode_reg_config) for llhwc_setmode_reg_config
+    rwip_driver.o(i.llhwc_phy_prerx_flash) refers to rwip_driver.o(.data) for .data
+    rwip_driver.o(i.llhwc_setmode_reg_config) refers to ns_ble.o(.bss) for app_env
+    rwip_driver.o(i.llhwc_setmode_reg_config) refers to rwip_driver.o(.data) for .data
+    rwip_driver.o(i.radio_freq_cal_from_trim) refers to rwip_driver.o(.data) for .data
+    rwip_driver.o(i.radio_hse_mco_set) refers to ffltui.o(.text) for __aeabi_ui2f
+    rwip_driver.o(i.radio_hse_mco_set) refers to fflti.o(.text) for __aeabi_i2f
+    rwip_driver.o(i.radio_hse_mco_set) refers to fdiv.o(.text) for __aeabi_fdiv
+    rwip_driver.o(i.radio_hse_mco_set) refers to fmul.o(.text) for __aeabi_fmul
+    rwip_driver.o(i.radio_hse_mco_set) refers to ffixui.o(.text) for __aeabi_f2uiz
+    rwip_driver.o(i.radio_hse_mco_set) refers to fadd.o(.text) for __aeabi_fadd
+    rwip_driver.o(i.radio_hse_mco_set) refers to rwip_driver.o(.data) for .data
+    rwip_driver.o(i.radio_read_trim_mac_address) refers to memcpya.o(.text) for __aeabi_memcpy
+    rwip_driver.o(i.radio_read_trim_mac_address) refers to system_n32wb03x.o(.constdata) for TRIM_READ_CMD_CODE
+    rwip_driver.o(i.radio_read_trim_mco_freq) refers to memcpya.o(.text) for __aeabi_memcpy
+    rwip_driver.o(i.radio_read_trim_mco_freq) refers to system_n32wb03x.o(.constdata) for TRIM_READ_CMD_CODE
+    rwip_driver.o(i.rf_tx_power_set) refers to rwip_driver.o(.data) for .data
+    rwip_driver.o(i.rf_tx_power_set) refers to rwip_driver.o(.constdata) for .constdata
+    rwip_driver.o(i.rwip_sleep) refers to uidiv.o(.text) for __aeabi_uidivmod
+    rwip_driver.o(i.rwip_sleep) refers to rwip_driver.o(i.__ARM_common_ll_mulss) for __ARM_common_ll_mulss
+    rwip_driver.o(i.rwip_sleep) refers to uldiv.o(.text) for __aeabi_uldivmod
+    rwip_driver.o(i.rwip_sleep) refers to ns_ble.o(.bss) for app_env
+    rwip_driver.o(i.rwip_slp_isr) refers to ffltui.o(.text) for __aeabi_ui2f
+    rwip_driver.o(i.rwip_slp_isr) refers to fdiv.o(.text) for __aeabi_fdiv
+    rwip_driver.o(i.rwip_slp_isr) refers to ffltul.o(.text) for __aeabi_ul2f
+    rwip_driver.o(i.rwip_slp_isr) refers to fmul.o(.text) for __aeabi_fmul
+    rwip_driver.o(i.rwip_slp_isr) refers to ffixul.o(.text) for __aeabi_f2ulz
+    rwip_driver.o(i.rwip_slp_isr) refers to uldiv.o(.text) for __aeabi_uldivmod
+    rwip_driver.o(i.rwip_slp_isr) refers to rwip_driver.o(i.llhwc_phy_prerx_flash) for llhwc_phy_prerx_flash
+    rwip_driver.o(i.rwip_slp_isr) refers to rwip_driver.o(.data) for .data
+    rwip_driver.o(i.rwip_slp_isr) refers to rwip_driver.o(.constdata) for .constdata
+    prf.o(i.prf_add_profile) refers to prf.o(i.prf_itf_get) for prf_itf_get
+    prf.o(i.prf_add_profile) refers to prf.o(.bss) for .bss
+    prf.o(i.prf_cleanup) refers to prf.o(.bss) for .bss
+    prf.o(i.prf_create) refers to prf.o(.bss) for .bss
+    prf.o(i.prf_env_get) refers to prf.o(.bss) for .bss
+    prf.o(i.prf_get_id_from_task) refers to prf.o(.bss) for .bss
+    prf.o(i.prf_get_itf_func_register) refers to prf.o(.bss) for .bss
+    prf.o(i.prf_get_task_from_id) refers to prf.o(.bss) for .bss
+    prf.o(i.prf_init) refers to prf.o(.bss) for .bss
+    prf.o(i.prf_itf_get) refers to prf.o(.bss) for .bss
+    diss.o(i.diss_init) refers to diss_task.o(i.diss_task_init) for diss_task_init
+    diss.o(i.diss_init) refers to diss.o(.constdata) for .constdata
+    diss.o(i.diss_prf_itf_get) refers to diss.o(.constdata) for .constdata
+    diss.o(.constdata) refers to diss.o(i.diss_init) for diss_init
+    diss.o(.constdata) refers to diss.o(i.diss_destroy) for diss_destroy
+    diss.o(.constdata) refers to diss.o(i.diss_create) for diss_create
+    diss.o(.constdata) refers to diss.o(i.diss_cleanup) for diss_cleanup
+    diss_task.o(i.diss_set_value_req_handler) refers to prf.o(i.prf_env_get) for prf_env_get
+    diss_task.o(i.diss_set_value_req_handler) refers to diss.o(i.diss_value_to_handle) for diss_value_to_handle
+    diss_task.o(i.diss_set_value_req_handler) refers to diss.o(i.diss_check_val_len) for diss_check_val_len
+    diss_task.o(i.diss_set_value_req_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    diss_task.o(i.diss_task_init) refers to prf.o(i.prf_env_get) for prf_env_get
+    diss_task.o(i.diss_task_init) refers to diss_task.o(.constdata) for .constdata
+    diss_task.o(i.diss_value_cfm_handler) refers to prf.o(i.prf_env_get) for prf_env_get
+    diss_task.o(i.diss_value_cfm_handler) refers to diss.o(i.diss_value_to_handle) for diss_value_to_handle
+    diss_task.o(i.diss_value_cfm_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    diss_task.o(i.gattc_read_req_ind_handler) refers to prf.o(i.prf_env_get) for prf_env_get
+    diss_task.o(i.gattc_read_req_ind_handler) refers to diss.o(i.diss_handle_to_value) for diss_handle_to_value
+    diss_task.o(i.gattc_read_req_ind_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    diss_task.o(i.gattc_read_req_ind_handler) refers to prf.o(i.prf_dst_task_get) for prf_dst_task_get
+    diss_task.o(.constdata) refers to diss_task.o(i.diss_set_value_req_handler) for diss_set_value_req_handler
+    diss_task.o(.constdata) refers to diss_task.o(i.gattc_read_req_ind_handler) for gattc_read_req_ind_handler
+    diss_task.o(.constdata) refers to diss_task.o(i.diss_value_cfm_handler) for diss_value_cfm_handler
+    rdtss.o(i.rdtss_cleanup) refers to rdtss_task.o(i.rdtss_set_ccc_value) for rdtss_set_ccc_value
+    rdtss.o(i.rdtss_create) refers to rdtss_task.o(i.rdtss_set_ccc_value) for rdtss_set_ccc_value
+    rdtss.o(i.rdtss_init) refers to rdtss_task.o(i.rdtss_task_init) for rdtss_task_init
+    rdtss.o(i.rdtss_init) refers to rdtss_task.o(i.rdtss_init_ccc_values) for rdtss_init_ccc_values
+    rdtss.o(i.rdtss_prf_itf_get) refers to rdtss.o(.constdata) for .constdata
+    rdtss.o(.constdata) refers to rdtss.o(i.rdtss_init) for rdtss_init
+    rdtss.o(.constdata) refers to rdtss.o(i.rdtss_destroy) for rdtss_destroy
+    rdtss.o(.constdata) refers to rdtss.o(i.rdtss_create) for rdtss_create
+    rdtss.o(.constdata) refers to rdtss.o(i.rdtss_cleanup) for rdtss_cleanup
+    rdtss_task.o(i.gattc_att_info_req_ind_handler) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.gattc_cmp_evt_handler) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.gattc_read_req_ind_handler) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.gattc_read_req_ind_handler) refers to rdts_common.o(i.rdtss_get_att_idx) for rdtss_get_att_idx
+    rdtss_task.o(i.gattc_read_req_ind_handler) refers to rdtss_task.o(i.rdtss_att_get_value) for rdtss_att_get_value
+    rdtss_task.o(i.gattc_read_req_ind_handler) refers to prf.o(i.prf_dst_task_get) for prf_dst_task_get
+    rdtss_task.o(i.gattc_read_req_ind_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    rdtss_task.o(i.gattc_write_req_ind_handler) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.gattc_write_req_ind_handler) refers to rdts_common.o(i.rdtss_get_att_idx) for rdtss_get_att_idx
+    rdtss_task.o(i.gattc_write_req_ind_handler) refers to rdts_common.o(i.get_value_handle) for get_value_handle
+    rdtss_task.o(i.gattc_write_req_ind_handler) refers to rdts_common.o(i.check_client_char_cfg) for check_client_char_cfg
+    rdtss_task.o(i.gattc_write_req_ind_handler) refers to rdtss_task.o(i.rdtss_att_get_value) for rdtss_att_get_value
+    rdtss_task.o(i.gattc_write_req_ind_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    rdtss_task.o(i.gattc_write_req_ind_handler) refers to rdtss_task.o(i.rdtss_att_set_value) for rdtss_att_set_value
+    rdtss_task.o(i.gattc_write_req_ind_handler) refers to prf.o(i.prf_dst_task_get) for prf_dst_task_get
+    rdtss_task.o(i.rdtss_att_get_value) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.rdtss_att_info_rsp_handler) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.rdtss_att_set_value) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.rdtss_att_set_value) refers to memcpya.o(.text) for __aeabi_memcpy
+    rdtss_task.o(i.rdtss_init_ccc_values) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.rdtss_init_ccc_values) refers to memcpya.o(.text) for __aeabi_memcpy
+    rdtss_task.o(i.rdtss_set_ccc_value) refers to rdtss_task.o(i.rdtss_att_get_value) for rdtss_att_get_value
+    rdtss_task.o(i.rdtss_set_ccc_value) refers to memcpya.o(.text) for __aeabi_memcpy
+    rdtss_task.o(i.rdtss_set_ccc_value) refers to rdtss_task.o(i.rdtss_att_set_value) for rdtss_att_set_value
+    rdtss_task.o(i.rdtss_task_init) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.rdtss_task_init) refers to rdtss_task.o(.constdata) for .constdata
+    rdtss_task.o(i.rdtss_val_ind_req_handler) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.rdtss_val_ind_req_handler) refers to rdts_common.o(i.get_cfg_handle) for get_cfg_handle
+    rdtss_task.o(i.rdtss_val_ind_req_handler) refers to rdts_common.o(i.rdtss_get_att_idx) for rdtss_get_att_idx
+    rdtss_task.o(i.rdtss_val_ind_req_handler) refers to rdtss_task.o(i.rdtss_att_get_value) for rdtss_att_get_value
+    rdtss_task.o(i.rdtss_val_ind_req_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    rdtss_task.o(i.rdtss_val_ntf_req_handler) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.rdtss_val_ntf_req_handler) refers to rdts_common.o(i.get_cfg_handle) for get_cfg_handle
+    rdtss_task.o(i.rdtss_val_ntf_req_handler) refers to rdts_common.o(i.rdtss_get_att_idx) for rdtss_get_att_idx
+    rdtss_task.o(i.rdtss_val_ntf_req_handler) refers to printf8.o(i.__0printf$8) for __2printf
+    rdtss_task.o(i.rdtss_val_ntf_req_handler) refers to rdtss_task.o(i.rdtss_att_get_value) for rdtss_att_get_value
+    rdtss_task.o(i.rdtss_val_ntf_req_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    rdtss_task.o(i.rdtss_val_set_req_handler) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdtss_task.o(i.rdtss_val_set_req_handler) refers to lib_att.o(i.attm_att_set_value) for attm_att_set_value
+    rdtss_task.o(i.rdtss_value_req_rsp_handler) refers to rdts_common.o(i.rdtss_get_att_handle) for rdtss_get_att_handle
+    rdtss_task.o(i.rdtss_value_req_rsp_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    rdtss_task.o(.constdata) refers to rdtss_task.o(i.gattc_read_req_ind_handler) for gattc_read_req_ind_handler
+    rdtss_task.o(.constdata) refers to rdtss_task.o(i.gattc_write_req_ind_handler) for gattc_write_req_ind_handler
+    rdtss_task.o(.constdata) refers to rdtss_task.o(i.gattc_att_info_req_ind_handler) for gattc_att_info_req_ind_handler
+    rdtss_task.o(.constdata) refers to rdtss_task.o(i.gattc_cmp_evt_handler) for gattc_cmp_evt_handler
+    rdtss_task.o(.constdata) refers to rdtss_task.o(i.rdtss_val_ntf_req_handler) for rdtss_val_ntf_req_handler
+    rdtss_task.o(.constdata) refers to rdtss_task.o(i.rdtss_val_set_req_handler) for rdtss_val_set_req_handler
+    rdtss_task.o(.constdata) refers to rdtss_task.o(i.rdtss_val_ind_req_handler) for rdtss_val_ind_req_handler
+    rdtss_task.o(.constdata) refers to rdtss_task.o(i.rdtss_att_info_rsp_handler) for rdtss_att_info_rsp_handler
+    rdtss_task.o(.constdata) refers to rdtss_task.o(i.rdtss_value_req_rsp_handler) for rdtss_value_req_rsp_handler
+    rdts_common.o(i.rdtss_get_att_handle) refers to prf.o(i.prf_env_get) for prf_env_get
+    rdts_common.o(i.rdtss_get_att_idx) refers to prf.o(i.prf_env_get) for prf_env_get
+    ns_log_lpuart.o(i.GPIO_Configuration) refers to n32wb03x_rcc.o(i.RCC_EnableAPB2PeriphClk) for RCC_EnableAPB2PeriphClk
+    ns_log_lpuart.o(i.GPIO_Configuration) refers to n32wb03x_gpio.o(i.GPIO_InitStruct) for GPIO_InitStruct
+    ns_log_lpuart.o(i.GPIO_Configuration) refers to n32wb03x_gpio.o(i.GPIO_InitPeripheral) for GPIO_InitPeripheral
+    ns_log_lpuart.o(i.RCC_Configuration) refers to n32wb03x_rcc.o(i.RCC_ConfigLpuartClk) for RCC_ConfigLpuartClk
+    ns_log_lpuart.o(i.RCC_Configuration) refers to n32wb03x_rcc.o(i.RCC_EnableLpuartClk) for RCC_EnableLpuartClk
+    ns_log_lpuart.o(i.fputc) refers to n32wb03x_lpuart.o(i.LPUART_SendData) for LPUART_SendData
+    ns_log_lpuart.o(i.fputc) refers to n32wb03x_lpuart.o(i.LPUART_GetFlagStatus) for LPUART_GetFlagStatus
+    ns_log_lpuart.o(i.fputc) refers to n32wb03x_lpuart.o(i.LPUART_ClrFlag) for LPUART_ClrFlag
+    ns_log_lpuart.o(i.fputc) refers to ns_log_lpuart.o(.data) for .data
+    ns_log_lpuart.o(i.ns_log_lpuart_init) refers to n32wb03x_rcc.o(i.RCC_ConfigLpuartClk) for RCC_ConfigLpuartClk
+    ns_log_lpuart.o(i.ns_log_lpuart_init) refers to n32wb03x_rcc.o(i.RCC_EnableLpuartClk) for RCC_EnableLpuartClk
+    ns_log_lpuart.o(i.ns_log_lpuart_init) refers to n32wb03x_rcc.o(i.RCC_EnableAPB2PeriphClk) for RCC_EnableAPB2PeriphClk
+    ns_log_lpuart.o(i.ns_log_lpuart_init) refers to n32wb03x_gpio.o(i.GPIO_InitStruct) for GPIO_InitStruct
+    ns_log_lpuart.o(i.ns_log_lpuart_init) refers to n32wb03x_gpio.o(i.GPIO_InitPeripheral) for GPIO_InitPeripheral
+    ns_log_lpuart.o(i.ns_log_lpuart_init) refers to n32wb03x_lpuart.o(i.LPUART_DeInit) for LPUART_DeInit
+    ns_log_lpuart.o(i.ns_log_lpuart_init) refers to n32wb03x_lpuart.o(i.LPUART_Init) for LPUART_Init
+    ns_sleep.o(i.entry_sleep) refers to ns_ble.o(i.ns_iwdg_config) for ns_iwdg_config
+    ns_sleep.o(i.entry_sleep) refers to ns_log_lpuart.o(i.ns_log_lpuart_init) for ns_log_lpuart_init
+    ns_sleep.o(i.ns_sleep) refers to main.o(i.app_sleep_prepare_proc) for app_sleep_prepare_proc
+    ns_sleep.o(i.ns_sleep) refers to rwip_driver.o(i.rwip_sleep) for rwip_sleep
+    ns_sleep.o(i.ns_sleep) refers to ns_sleep.o(i.entry_sleep) for entry_sleep
+    ns_sleep.o(i.ns_sleep) refers to main.o(i.app_sleep_resume_proc) for app_sleep_resume_proc
+    ns_sleep.o(i.ns_sleep) refers to ns_sleep.o(.data) for .data
+    ns_sleep.o(i.ns_sleep_lock_acquire) refers to ns_sleep.o(.data) for .data
+    ns_sleep.o(i.ns_sleep_lock_release) refers to ns_sleep.o(.data) for .data
+    ns_error.o(i.error_handler) refers to ns_error.o(.bss) for .bss
+    ns_timer.o(i.ns_timer_api_process_handler) refers to ns_timer.o(.bss) for .bss
+    ns_timer.o(i.ns_timer_api_process_handler) refers to ns_timer.o(i.timer_modified_handler) for timer_modified_handler
+    ns_timer.o(i.ns_timer_api_process_handler) refers to ns_timer.o(i.timer_canceled_handler) for timer_canceled_handler
+    ns_timer.o(i.ns_timer_cancel) refers to ns_timer.o(.bss) for .bss
+    ns_timer.o(i.ns_timer_cancel) refers to ns_timer.o(i.timer_canceled_handler) for timer_canceled_handler
+    ns_timer.o(i.ns_timer_cancel_all) refers to ns_timer.o(i.timer_canceled_handler) for timer_canceled_handler
+    ns_timer.o(i.ns_timer_cancel_all) refers to ns_timer.o(.bss) for .bss
+    ns_timer.o(i.ns_timer_create) refers to ns_timer.o(.bss) for .bss
+    ns_timer.o(i.ns_timer_modify) refers to ns_timer.o(.bss) for .bss
+    ns_timer.o(i.ns_timer_modify) refers to ns_timer.o(i.timer_modified_handler) for timer_modified_handler
+    ns_sec.o(i.gapc_bond_ind_handler) refers to ns_ble.o(i.ns_ble_disconnect) for ns_ble_disconnect
+    ns_sec.o(i.gapc_bond_ind_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_sec.o(i.gapc_bond_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_sec.o(i.gapc_bond_ind_handler) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.gapc_bond_req_ind_handler) refers to rand.o(.text) for rand
+    ns_sec.o(i.gapc_bond_req_ind_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_sec.o(i.gapc_bond_req_ind_handler) refers to uidiv.o(.text) for __aeabi_uidivmod
+    ns_sec.o(i.gapc_bond_req_ind_handler) refers to memseta.o(.text) for __aeabi_memclr
+    ns_sec.o(i.gapc_bond_req_ind_handler) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.gapc_bond_req_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_sec.o(i.gapc_encrypt_ind_handler) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.gapc_encrypt_req_ind_handler) refers to memseta.o(.text) for __aeabi_memclr4
+    ns_sec.o(i.gapc_encrypt_req_ind_handler) refers to ns_sec.o(i.ns_bond_db_get_size) for ns_bond_db_get_size
+    ns_sec.o(i.gapc_encrypt_req_ind_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_sec.o(i.gapc_encrypt_req_ind_handler) refers to memcmp.o(.text) for memcmp
+    ns_sec.o(i.gapc_encrypt_req_ind_handler) refers to printf8.o(i.__0printf$8) for __2printf
+    ns_sec.o(i.gapc_encrypt_req_ind_handler) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.ns_bond_db_get_size) refers to n32wb03x_qflash.o(i.Qflash_Erase_Sector) for Qflash_Erase_Sector
+    ns_sec.o(i.ns_bond_db_get_size) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.ns_bond_db_load) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_sec.o(i.ns_bond_db_load) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.ns_bond_last_bonded_addr) refers to memseta.o(.text) for __aeabi_memclr4
+    ns_sec.o(i.ns_bond_last_bonded_addr) refers to ns_sec.o(i.ns_bond_db_get_size) for ns_bond_db_get_size
+    ns_sec.o(i.ns_bond_last_bonded_addr) refers to ns_sec.o(i.ns_bond_db_load) for ns_bond_db_load
+    ns_sec.o(i.ns_bond_last_bonded_peer_id) refers to memseta.o(.text) for __aeabi_memclr4
+    ns_sec.o(i.ns_bond_last_bonded_peer_id) refers to ns_sec.o(i.ns_bond_db_get_size) for ns_bond_db_get_size
+    ns_sec.o(i.ns_bond_last_bonded_peer_id) refers to ns_sec.o(i.ns_bond_db_load) for ns_bond_db_load
+    ns_sec.o(i.ns_bond_last_bonded_ral_info) refers to memseta.o(.text) for __aeabi_memclr4
+    ns_sec.o(i.ns_bond_last_bonded_ral_info) refers to ns_sec.o(i.ns_bond_db_get_size) for ns_bond_db_get_size
+    ns_sec.o(i.ns_bond_last_bonded_ral_info) refers to ns_sec.o(i.ns_bond_db_load) for ns_bond_db_load
+    ns_sec.o(i.ns_bond_last_bonded_ral_info) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_sec.o(i.ns_bond_last_bonded_ral_info) refers to ns_ble.o(.bss) for gap_env
+    ns_sec.o(i.ns_bond_resolv_addr_start) refers to ns_sec.o(i.ns_bond_db_get_size) for ns_bond_db_get_size
+    ns_sec.o(i.ns_bond_resolv_addr_start) refers to memseta.o(.text) for __aeabi_memclr4
+    ns_sec.o(i.ns_bond_resolv_addr_start) refers to ns_sec.o(i.ns_bond_db_load) for ns_bond_db_load
+    ns_sec.o(i.ns_bond_resolv_addr_start) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_sec.o(i.ns_bond_search_addr_irk) refers to memseta.o(.text) for __aeabi_memclr4
+    ns_sec.o(i.ns_bond_search_addr_irk) refers to ns_sec.o(i.ns_bond_db_get_size) for ns_bond_db_get_size
+    ns_sec.o(i.ns_bond_search_addr_irk) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_sec.o(i.ns_bond_search_addr_irk) refers to memcmp.o(.text) for memcmp
+    ns_sec.o(i.ns_bond_search_addr_irk) refers to ns_sec.o(i.ns_bond_resolv_addr_start) for ns_bond_resolv_addr_start
+    ns_sec.o(i.ns_bond_search_addr_irk) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.ns_bond_search_addr_irk) refers to ns_ble.o(.bss) for app_env
+    ns_sec.o(i.ns_sec_bond_db_erase_all) refers to n32wb03x_qflash.o(i.Qflash_Erase_Sector) for Qflash_Erase_Sector
+    ns_sec.o(i.ns_sec_bond_db_erase_all) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.ns_sec_bond_store_evt_handler) refers to memseta.o(.text) for __aeabi_memclr4
+    ns_sec.o(i.ns_sec_bond_store_evt_handler) refers to ns_sec.o(i.ns_bond_db_get_size) for ns_bond_db_get_size
+    ns_sec.o(i.ns_sec_bond_store_evt_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_sec.o(i.ns_sec_bond_store_evt_handler) refers to n32wb03x_qflash.o(i.Qflash_Erase_Sector) for Qflash_Erase_Sector
+    ns_sec.o(i.ns_sec_bond_store_evt_handler) refers to n32wb03x_qflash.o(i.Qflash_Write) for Qflash_Write
+    ns_sec.o(i.ns_sec_bond_store_evt_handler) refers to printf8.o(i.__0printf$8) for __2printf
+    ns_sec.o(i.ns_sec_bond_store_evt_handler) refers to ns_ble.o(i.ns_ble_list_set_ral) for ns_ble_list_set_ral
+    ns_sec.o(i.ns_sec_bond_store_evt_handler) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.ns_sec_bond_store_evt_handler) refers to ns_ble.o(.bss) for gap_env
+    ns_sec.o(i.ns_sec_get_bond_status) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.ns_sec_get_iocap) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.ns_sec_init) refers to n32wb03x_qflash.o(i.Qflash_Init) for Qflash_Init
+    ns_sec.o(i.ns_sec_init) refers to ns_sec.o(i.ns_bond_db_get_size) for ns_bond_db_get_size
+    ns_sec.o(i.ns_sec_init) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.ns_sec_pincode_respond) refers to memseta.o(.text) for __aeabi_memclr
+    ns_sec.o(i.ns_sec_send_bond_start) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.ns_sec_send_encrypt_req) refers to memseta.o(.text) for __aeabi_memclr4
+    ns_sec.o(i.ns_sec_send_encrypt_req) refers to ns_sec.o(i.ns_bond_db_get_size) for ns_bond_db_get_size
+    ns_sec.o(i.ns_sec_send_encrypt_req) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_sec.o(i.ns_sec_send_encrypt_req) refers to memcmp.o(.text) for memcmp
+    ns_sec.o(i.ns_sec_send_encrypt_req) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(i.ns_sec_send_encrypt_req) refers to ns_ble.o(.bss) for app_env
+    ns_sec.o(i.ns_sec_send_security_req) refers to ns_sec.o(.bss) for .bss
+    ns_sec.o(.constdata) refers to ns_sec.o(i.app_sec_msg_dflt_handler) for app_sec_msg_dflt_handler
+    ns_sec.o(.constdata) refers to ns_sec.o(i.gapc_bond_req_ind_handler) for gapc_bond_req_ind_handler
+    ns_sec.o(.constdata) refers to ns_sec.o(i.gapc_bond_ind_handler) for gapc_bond_ind_handler
+    ns_sec.o(.constdata) refers to ns_sec.o(i.gapc_encrypt_req_ind_handler) for gapc_encrypt_req_ind_handler
+    ns_sec.o(.constdata) refers to ns_sec.o(i.gapc_encrypt_ind_handler) for gapc_encrypt_ind_handler
+    ns_sec.o(.constdata) refers to ns_sec.o(.constdata) for app_sec_msg_handler_list
+    ns_ble.o(i.app_create_advertising) refers to ns_sec.o(i.ns_sec_get_bond_status) for ns_sec_get_bond_status
+    ns_ble.o(i.app_create_advertising) refers to ns_sec.o(i.ns_bond_last_bonded_peer_id) for ns_bond_last_bonded_peer_id
+    ns_ble.o(i.app_create_advertising) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.app_set_adv_data) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble.o(i.app_set_adv_data) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.app_set_scan_rsp_data) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble.o(i.app_set_scan_rsp_data) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.app_start_advertising) refers to rwip_driver.o(i.llhwc_modem_setmode) for llhwc_modem_setmode
+    ns_ble.o(i.app_start_advertising) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_EXTI4_12_IRQHandler) refers to n32wb03x_exti.o(i.EXTI_GetITStatus) for EXTI_GetITStatus
+    ns_ble.o(i.ns_EXTI4_12_IRQHandler) refers to n32wb03x_exti.o(i.EXTI_ClrITPendBit) for EXTI_ClrITPendBit
+    ns_ble.o(i.ns_EXTI4_12_IRQHandler) refers to ns_log_lpuart.o(i.ns_log_lpuart_init) for ns_log_lpuart_init
+    ns_ble.o(i.ns_EXTI4_12_IRQHandler) refers to printf8.o(i.__0printf$8) for __2printf
+    ns_ble.o(i.ns_EXTI4_12_IRQHandler) refers to ns_ble.o(.data) for .data
+    ns_ble.o(i.ns_HardFault_Handler) refers to ns_log_lpuart.o(i.ns_log_lpuart_init) for ns_log_lpuart_init
+    ns_ble.o(i.ns_HardFault_Handler) refers to printf8.o(i.__0printf$8) for __2printf
+    ns_ble.o(i.ns_HardFault_Handler) refers to ns_ble.o(.data) for .data
+    ns_ble.o(i.ns_HardFault_Handler) refers to ns_ble.o(.constdata) for .constdata
+    ns_ble.o(i.ns_ble_active_rssi) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_add_prf_func_register) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_add_svc) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_adv_data_set) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble.o(i.ns_ble_adv_data_set) refers to ns_ble.o(i.app_set_adv_data) for app_set_adv_data
+    ns_ble.o(i.ns_ble_adv_data_set) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_adv_fsm_next) refers to ns_ble.o(i.app_create_advertising) for app_create_advertising
+    ns_ble.o(i.ns_ble_adv_fsm_next) refers to ns_ble.o(i.app_set_adv_data) for app_set_adv_data
+    ns_ble.o(i.ns_ble_adv_fsm_next) refers to ns_ble.o(i.app_start_advertising) for app_start_advertising
+    ns_ble.o(i.ns_ble_adv_fsm_next) refers to ns_ble.o(i.app_set_scan_rsp_data) for app_set_scan_rsp_data
+    ns_ble.o(i.ns_ble_adv_fsm_next) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_adv_init) refers to memcpya.o(.text) for __aeabi_memcpy4
+    ns_ble.o(i.ns_ble_adv_init) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_adv_start) refers to ns_ble.o(i.app_create_advertising) for app_create_advertising
+    ns_ble.o(i.ns_ble_adv_start) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_adv_stop) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_create_init) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_create_scan) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_delete_init) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_delete_scan) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_disconnect) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_dle_set) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_ex_adv_data_set) refers to ns_ble.o(i.app_set_adv_data) for app_set_adv_data
+    ns_ble.o(i.ns_ble_ex_adv_data_set) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_gap_init) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble.o(i.ns_ble_gap_init) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_get_active_connection) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_get_conidx_by_role) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_get_connection_num) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_get_connection_state) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_get_peer_info) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_list_set_ral) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble.o(i.ns_ble_list_set_wl) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble.o(i.ns_ble_master_connection_num) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_mtu_set) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_phy_set) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_prf_task_register) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_prod_test_cmd_send) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble.o(i.ns_ble_prod_test_cmd_send) refers to rwip_driver.o(i.llhwc_modem_setmode) for llhwc_modem_setmode
+    ns_ble.o(i.ns_ble_radio_calibration) refers to ffltui.o(.text) for __aeabi_ui2f
+    ns_ble.o(i.ns_ble_radio_calibration) refers to fdiv.o(.text) for __aeabi_fdiv
+    ns_ble.o(i.ns_ble_radio_calibration) refers to ffixui.o(.text) for __aeabi_f2uiz
+    ns_ble.o(i.ns_ble_radio_calibration) refers to rwip_driver.o(i.radio_hse_mco_set) for radio_hse_mco_set
+    ns_ble.o(i.ns_ble_radio_power_set) refers to rwip_driver.o(i.rf_tx_power_set) for rf_tx_power_set
+    ns_ble.o(i.ns_ble_resolv_addr) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble.o(i.ns_ble_scan_data_find) refers to memcmp.o(.text) for memcmp
+    ns_ble.o(i.ns_ble_scan_init) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_scan_rsp_data_set) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble.o(i.ns_ble_scan_rsp_data_set) refers to ns_ble.o(i.app_set_scan_rsp_data) for app_set_scan_rsp_data
+    ns_ble.o(i.ns_ble_scan_rsp_data_set) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_set_active_connection) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_set_slave_latency) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_slave_connection_num) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_stack_init) refers to memcpya.o(.text) for __aeabi_memcpy4
+    ns_ble.o(i.ns_ble_stack_init) refers to n32wb03x_exti.o(i.EXTI_InitPeripheral) for EXTI_InitPeripheral
+    ns_ble.o(i.ns_ble_stack_init) refers to memseta.o(.text) for __aeabi_memclr4
+    ns_ble.o(i.ns_ble_stack_init) refers to n32wb03x_rcc.o(i.RCC_EnableAHBPeriphClk) for RCC_EnableAHBPeriphClk
+    ns_ble.o(i.ns_ble_stack_init) refers to rwip.o(i.rwip_init) for rwip_init
+    ns_ble.o(i.ns_ble_stack_init) refers to prf.o(i.prf_init) for prf_init
+    ns_ble.o(i.ns_ble_stack_init) refers to startup_n32wb03x.o(RESET) for __Vectors
+    ns_ble.o(i.ns_ble_stack_init) refers to ns_ble.o(i.ns_HardFault_Handler) for ns_HardFault_Handler
+    ns_ble.o(i.ns_ble_stack_init) refers to ns_ble.o(.data) for .data
+    ns_ble.o(i.ns_ble_stack_init) refers to rwip_driver.o(i.rwip_slp_isr) for rwip_slp_isr
+    ns_ble.o(i.ns_ble_stack_init) refers to ns_ble.o(i.ns_EXTI4_12_IRQHandler) for ns_EXTI4_12_IRQHandler
+    ns_ble.o(i.ns_ble_stack_init) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_stack_init) refers to ns_ble.o(.constdata) for .constdata
+    ns_ble.o(i.ns_ble_stack_init) refers to prf.o(i.prf_add_profile) for prf_add_profile
+    ns_ble.o(i.ns_ble_stack_init) refers to prf.o(i.prf_get_task_from_id) for prf_get_task_from_id
+    ns_ble.o(i.ns_ble_stack_init) refers to prf.o(i.prf_get_id_from_task) for prf_get_id_from_task
+    ns_ble.o(i.ns_ble_stack_init) refers to ns_ble_task.o(.constdata) for TASK_DESC_APP_M
+    ns_ble.o(i.ns_ble_start_init) refers to rwip_driver.o(i.llhwc_modem_setmode) for llhwc_modem_setmode
+    ns_ble.o(i.ns_ble_start_init) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_start_scan) refers to rwip_driver.o(i.llhwc_modem_setmode) for llhwc_modem_setmode
+    ns_ble.o(i.ns_ble_start_scan) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_stop_init) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_stop_scan) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_ble_update_param) refers to printf8.o(i.__0printf$8) for __2printf
+    ns_ble.o(i.ns_ble_update_param) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_iwdg_config) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_iwdg_reload) refers to ns_ble.o(.data) for .data
+    ns_ble.o(i.ns_iwdg_reload) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_peripheral_config) refers to ns_ble.o(i.ns_ble_lsc_config) for ns_ble_lsc_config
+    ns_ble.o(i.ns_peripheral_config) refers to printf8.o(i.__0printf$8) for __2printf
+    ns_ble.o(i.ns_peripheral_config) refers to ns_sleep.o(i.ns_sleep_lock_acquire) for ns_sleep_lock_acquire
+    ns_ble.o(i.ns_peripheral_config) refers to ns_ble.o(.bss) for .bss
+    ns_ble.o(i.ns_peripheral_config) refers to ns_ble.o(.data) for .data
+    ns_ble_task.o(i.app_conn_params_update_evt_handler) refers to ns_ble.o(i.ns_ble_update_param) for ns_ble_update_param
+    ns_ble_task.o(i.app_conn_params_update_evt_handler) refers to ns_ble.o(.bss) for gap_env
+    ns_ble_task.o(i.app_entry_point_handler) refers to ns_timer.o(i.ns_timer_api_process_handler) for ns_timer_api_process_handler
+    ns_ble_task.o(i.app_entry_point_handler) refers to ns_ble.o(.bss) for ble_prf_evn
+    ns_ble_task.o(i.app_entry_point_handler) refers to ns_sec.o(.constdata) for app_sec_handlers
+    ns_ble_task.o(i.app_init_timeout_evt_handler) refers to ns_ble.o(i.ns_ble_stop_init) for ns_ble_stop_init
+    ns_ble_task.o(i.app_init_timeout_evt_handler) refers to ns_ble.o(.bss) for scan_env
+    ns_ble_task.o(i.app_lsi_calib_evt_handler) refers to ns_ble.o(i.ns_ble_lsc_config) for ns_ble_lsc_config
+    ns_ble_task.o(i.app_lsi_calib_evt_handler) refers to ns_sleep.o(i.ns_sleep_lock_release) for ns_sleep_lock_release
+    ns_ble_task.o(i.app_lsi_calib_evt_handler) refers to ns_ble_task.o(.data) for .data
+    ns_ble_task.o(i.app_lsi_calib_evt_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapc_cmp_evt_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapc_conn_rssi_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapc_connection_req_ind_handler) refers to printf8.o(i.__0printf$8) for __2printf
+    ns_ble_task.o(i.gapc_connection_req_ind_handler) refers to ns_sec.o(i.ns_sec_get_bond_status) for ns_sec_get_bond_status
+    ns_ble_task.o(i.gapc_connection_req_ind_handler) refers to ns_sec.o(i.ns_sec_get_iocap) for ns_sec_get_iocap
+    ns_ble_task.o(i.gapc_connection_req_ind_handler) refers to ns_ble.o(i.ns_ble_adv_start) for ns_ble_adv_start
+    ns_ble_task.o(i.gapc_connection_req_ind_handler) refers to ns_ble_task.o(.constdata) for .constdata
+    ns_ble_task.o(i.gapc_connection_req_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapc_disconnect_ind_handler) refers to printf8.o(i.__0printf$8) for __2printf
+    ns_ble_task.o(i.gapc_disconnect_ind_handler) refers to ns_ble.o(i.ns_ble_get_connection_num) for ns_ble_get_connection_num
+    ns_ble_task.o(i.gapc_disconnect_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapc_get_dev_info_req_ind_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble_task.o(i.gapc_get_dev_info_req_ind_handler) refers to ns_ble.o(.bss) for gap_env
+    ns_ble_task.o(i.gapc_le_phy_ind_handler) refers to printf8.o(i.__0printf$8) for __2printf
+    ns_ble_task.o(i.gapc_le_phy_ind_handler) refers to rwip_driver.o(i.llhwc_modem_setmode) for llhwc_modem_setmode
+    ns_ble_task.o(i.gapc_le_pkt_size_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapc_param_update_req_ind_handler) refers to ns_ble.o(i.ns_ble_adv_start) for ns_ble_adv_start
+    ns_ble_task.o(i.gapc_param_update_req_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapc_param_updated_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapc_set_dev_info_req_ind_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble_task.o(i.gapc_set_dev_info_req_ind_handler) refers to ns_ble.o(.bss) for gap_env
+    ns_ble_task.o(i.gapm_activity_created_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapm_activity_stopped_ind_handler) refers to ns_ble.o(i.ns_ble_adv_fsm_next) for ns_ble_adv_fsm_next
+    ns_ble_task.o(i.gapm_activity_stopped_ind_handler) refers to ns_ble.o(i.ns_ble_delete_scan) for ns_ble_delete_scan
+    ns_ble_task.o(i.gapm_activity_stopped_ind_handler) refers to ns_ble.o(i.ns_ble_delete_init) for ns_ble_delete_init
+    ns_ble_task.o(i.gapm_activity_stopped_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapm_addr_solved_ind_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble_task.o(i.gapm_addr_solved_ind_handler) refers to ns_sec.o(i.ns_bond_search_addr_irk) for ns_bond_search_addr_irk
+    ns_ble_task.o(i.gapm_addr_solved_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to printf8.o(i.__0printf$8) for __2printf
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to prf.o(i.prf_init) for prf_init
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble.o(i.ns_peripheral_config) for ns_peripheral_config
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to memseta.o(.text) for __aeabi_memclr
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to rwip_driver.o(i.llhwc_modem_setmode) for llhwc_modem_setmode
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_sec.o(i.ns_sec_get_bond_status) for ns_sec_get_bond_status
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_sec.o(i.ns_bond_last_bonded_ral_info) for ns_bond_last_bonded_ral_info
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble.o(i.ns_ble_list_set_ral) for ns_ble_list_set_ral
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble.o(i.ns_ble_add_svc) for ns_ble_add_svc
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble.o(i.ns_ble_adv_stop) for ns_ble_adv_stop
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble.o(i.ns_ble_start_scan) for ns_ble_start_scan
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble.o(i.ns_ble_adv_start) for ns_ble_adv_start
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_sec.o(i.ns_bond_resolv_addr_start) for ns_bond_resolv_addr_start
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble.o(i.ns_ble_adv_fsm_next) for ns_ble_adv_fsm_next
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble.o(i.ns_ble_delete_scan) for ns_ble_delete_scan
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble.o(i.ns_ble_delete_init) for ns_ble_delete_init
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble.o(i.ns_ble_start_init) for ns_ble_start_init
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble_task.o(.constdata) for .constdata
+    ns_ble_task.o(i.gapm_cmp_evt_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gapm_ext_adv_repoer_ind_handler) refers to memcmp.o(.text) for memcmp
+    ns_ble_task.o(i.gapm_ext_adv_repoer_ind_handler) refers to ns_ble.o(i.ns_ble_scan_data_find) for ns_ble_scan_data_find
+    ns_ble_task.o(i.gapm_ext_adv_repoer_ind_handler) refers to ns_ble.o(i.ns_ble_stop_scan) for ns_ble_stop_scan
+    ns_ble_task.o(i.gapm_ext_adv_repoer_ind_handler) refers to ns_ble.o(i.ns_ble_start_init) for ns_ble_start_init
+    ns_ble_task.o(i.gapm_ext_adv_repoer_ind_handler) refers to ns_ble.o(.bss) for scan_env
+    ns_ble_task.o(i.gapm_gen_rand_nb_ind_handler) refers to rand.o(.text) for srand
+    ns_ble_task.o(i.gattc_cmp_evt_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(i.gattc_mtu_changed_ind_handler) refers to ns_ble.o(.bss) for app_env
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.app_entry_point_handler) for app_entry_point_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapm_activity_created_ind_handler) for gapm_activity_created_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapm_activity_stopped_ind_handler) for gapm_activity_stopped_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapm_gen_rand_nb_ind_handler) for gapm_gen_rand_nb_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapm_addr_solved_ind_handler) for gapm_addr_solved_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapm_cmp_evt_handler) for gapm_cmp_evt_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapm_profile_added_ind_handler) for gapm_profile_added_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapm_ext_adv_repoer_ind_handler) for gapm_ext_adv_repoer_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gattc_mtu_changed_ind_handler) for gattc_mtu_changed_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gattc_cmp_evt_handler) for gattc_cmp_evt_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapc_connection_req_ind_handler) for gapc_connection_req_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapc_param_update_req_ind_handler) for gapc_param_update_req_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapc_param_updated_ind_handler) for gapc_param_updated_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapc_le_pkt_size_ind_handler) for gapc_le_pkt_size_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapc_disconnect_ind_handler) for gapc_disconnect_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapc_get_dev_info_req_ind_handler) for gapc_get_dev_info_req_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapc_le_phy_ind_handler) for gapc_le_phy_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapc_set_dev_info_req_ind_handler) for gapc_set_dev_info_req_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapc_cmp_evt_handler) for gapc_cmp_evt_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.gapc_conn_rssi_ind_handler) for gapc_conn_rssi_ind_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.app_lsi_calib_evt_handler) for app_lsi_calib_evt_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.app_conn_params_update_evt_handler) for app_conn_params_update_evt_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(i.app_init_timeout_evt_handler) for app_init_timeout_evt_handler
+    ns_ble_task.o(.constdata) refers to ns_sec.o(i.ns_sec_bond_store_evt_handler) for ns_sec_bond_store_evt_handler
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(.constdata) for app_msg_handler_tab
+    ns_ble_task.o(.constdata) refers to ns_ble_task.o(.data) for app_state
+    app_dis.o(i.app_dis_add_dis) refers to ns_ble.o(i.ns_ble_prf_task_register) for ns_ble_prf_task_register
+    app_dis.o(i.app_dis_add_dis) refers to prf.o(i.prf_get_itf_func_register) for prf_get_itf_func_register
+    app_dis.o(i.app_dis_add_dis) refers to app_dis.o(.constdata) for .constdata
+    app_dis.o(i.app_dis_add_dis) refers to diss.o(i.diss_prf_itf_get) for diss_prf_itf_get
+    app_dis.o(i.app_dis_init) refers to ns_ble.o(i.ns_ble_prf_task_register) for ns_ble_prf_task_register
+    app_dis.o(i.app_dis_init) refers to prf.o(i.prf_get_itf_func_register) for prf_get_itf_func_register
+    app_dis.o(i.app_dis_init) refers to app_dis.o(.constdata) for .constdata
+    app_dis.o(i.app_dis_init) refers to diss.o(i.diss_prf_itf_get) for diss_prf_itf_get
+    app_dis.o(i.diss_value_req_ind_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    app_dis.o(.constdata) refers to app_dis.o(i.diss_value_req_ind_handler) for diss_value_req_ind_handler
+    app_dis.o(.constdata) refers to app_dis.o(.constdata) for app_dis_msg_handler_list
+    app_rdtss.o(i.app_rdtss_add_rdts) refers to ns_ble.o(i.ns_ble_prf_task_register) for ns_ble_prf_task_register
+    app_rdtss.o(i.app_rdtss_add_rdts) refers to prf.o(i.prf_get_itf_func_register) for prf_get_itf_func_register
+    app_rdtss.o(i.app_rdtss_add_rdts) refers to app_rdtss.o(.constdata) for .constdata
+    app_rdtss.o(i.app_rdtss_add_rdts) refers to rdtss.o(i.rdtss_prf_itf_get) for rdtss_prf_itf_get
+    app_rdtss.o(i.app_rdtss_init) refers to ns_ble.o(i.ns_ble_prf_task_register) for ns_ble_prf_task_register
+    app_rdtss.o(i.app_rdtss_init) refers to prf.o(i.prf_get_itf_func_register) for prf_get_itf_func_register
+    app_rdtss.o(i.app_rdtss_init) refers to app_rdtss.o(.constdata) for .constdata
+    app_rdtss.o(i.app_rdtss_init) refers to rdtss.o(i.rdtss_prf_itf_get) for rdtss_prf_itf_get
+    app_rdtss.o(i.rdtss_send_notify) refers to prf.o(i.prf_get_task_from_id) for prf_get_task_from_id
+    app_rdtss.o(i.rdtss_send_notify) refers to memcpya.o(.text) for __aeabi_memcpy
+    app_rdtss.o(i.rdtss_send_notify) refers to ns_ble.o(.bss) for app_env
+    app_rdtss.o(i.rdtss_val_ntf_cfm_handler) refers to app_usart.o(i.usart_forward_to_ble_loop) for usart_forward_to_ble_loop
+    app_rdtss.o(i.rdtss_val_write_ind_handler) refers to app_usart.o(i.app_usart_tx_fifo_enter) for app_usart_tx_fifo_enter
+    app_rdtss.o(i.rdtss_value_req_ind_handler) refers to memcpya.o(.text) for __aeabi_memcpy
+    app_rdtss.o(.constdata) refers to app_rdtss.o(.constdata) for app_rdtss_msg_handler_list
+    app_rdtss.o(.constdata) refers to app_rdtss.o(i.rdtss_value_req_ind_handler) for rdtss_value_req_ind_handler
+    app_rdtss.o(.constdata) refers to app_rdtss.o(i.rdtss_val_write_ind_handler) for rdtss_val_write_ind_handler
+    app_rdtss.o(.constdata) refers to app_rdtss.o(i.rdtss_val_ntf_cfm_handler) for rdtss_val_ntf_cfm_handler
+    app_ble.o(i.app_ble_adv_init) refers to memseta.o(.text) for __aeabi_memclr4
+    app_ble.o(i.app_ble_adv_init) refers to memcpya.o(.text) for __aeabi_memcpy4
+    app_ble.o(i.app_ble_adv_init) refers to ns_ble.o(i.ns_ble_adv_init) for ns_ble_adv_init
+    app_ble.o(i.app_ble_adv_init) refers to app_ble.o(i.app_ble_adv_msg_handler) for app_ble_adv_msg_handler
+    app_ble.o(i.app_ble_connected) refers to app_usart.o(i.app_usart_dma_enable) for app_usart_dma_enable
+    app_ble.o(i.app_ble_connected) refers to app_gpio.o(i.LedOn) for LedOn
+    app_ble.o(i.app_ble_disconnected) refers to ns_ble.o(i.ns_ble_adv_start) for ns_ble_adv_start
+    app_ble.o(i.app_ble_disconnected) refers to app_usart.o(i.app_usart_dma_enable) for app_usart_dma_enable
+    app_ble.o(i.app_ble_disconnected) refers to app_gpio.o(i.LedOff) for LedOff
+    app_ble.o(i.app_ble_gap_params_init) refers to system_n32wb03x.o(i.SystemGetMacAddr) for SystemGetMacAddr
+    app_ble.o(i.app_ble_gap_params_init) refers to memcpya.o(.text) for __aeabi_memcpy
+    app_ble.o(i.app_ble_gap_params_init) refers to ns_ble.o(i.ns_ble_gap_init) for ns_ble_gap_init
+    app_ble.o(i.app_ble_init) refers to ns_ble.o(i.ns_ble_stack_init) for ns_ble_stack_init
+    app_ble.o(i.app_ble_init) refers to app_ble.o(i.app_ble_gap_params_init) for app_ble_gap_params_init
+    app_ble.o(i.app_ble_init) refers to app_ble.o(i.app_ble_sec_init) for app_ble_sec_init
+    app_ble.o(i.app_ble_init) refers to app_ble.o(i.app_ble_adv_init) for app_ble_adv_init
+    app_ble.o(i.app_ble_init) refers to ns_ble.o(i.ns_ble_add_prf_func_register) for ns_ble_add_prf_func_register
+    app_ble.o(i.app_ble_init) refers to ns_ble.o(i.ns_ble_adv_start) for ns_ble_adv_start
+    app_ble.o(i.app_ble_init) refers to app_ble.o(i.app_ble_msg_handler) for app_ble_msg_handler
+    app_ble.o(i.app_ble_init) refers to app_ble.o(i.app_user_msg_handler) for app_user_msg_handler
+    app_ble.o(i.app_ble_init) refers to app_dis.o(i.app_dis_add_dis) for app_dis_add_dis
+    app_ble.o(i.app_ble_init) refers to app_rdtss.o(i.app_rdtss_add_rdts) for app_rdtss_add_rdts
+    app_ble.o(i.app_ble_msg_handler) refers to ns_ble.o(i.ns_ble_adv_start) for ns_ble_adv_start
+    app_ble.o(i.app_ble_msg_handler) refers to app_usart.o(i.app_usart_dma_enable) for app_usart_dma_enable
+    app_ble.o(i.app_ble_msg_handler) refers to app_gpio.o(i.LedOff) for LedOff
+    app_ble.o(i.app_ble_msg_handler) refers to printf8.o(i.__0printf$8) for __2printf
+    app_ble.o(i.app_ble_msg_handler) refers to app_gpio.o(i.LedOn) for LedOn
+    app_ble.o(i.app_ble_prf_init) refers to ns_ble.o(i.ns_ble_add_prf_func_register) for ns_ble_add_prf_func_register
+    app_ble.o(i.app_ble_prf_init) refers to app_dis.o(i.app_dis_add_dis) for app_dis_add_dis
+    app_ble.o(i.app_ble_prf_init) refers to app_rdtss.o(i.app_rdtss_add_rdts) for app_rdtss_add_rdts
+    app_ble.o(i.app_ble_sec_init) refers to ns_sec.o(i.ns_sec_init) for ns_sec_init
+    app_ble.o(i.app_user_msg_handler) refers to app_usart.o(i.app_usart_tx_process) for app_usart_tx_process
+    main.o(i.main) refers to ns_log_lpuart.o(i.ns_log_lpuart_init) for ns_log_lpuart_init
+    main.o(i.main) refers to app_ble.o(i.app_ble_init) for app_ble_init
+    main.o(i.main) refers to printf8.o(i.__0printf$8) for __2printf
+    main.o(i.main) refers to app_gpio.o(i.LedInit) for LedInit
+    main.o(i.main) refers to app_gpio.o(i.LedOn) for LedOn
+    main.o(i.main) refers to app_usart.o(i.app_usart_dma_enable) for app_usart_dma_enable
+    main.o(i.main) refers to app_usart.o(i.usart_tx_dma_send) for usart_tx_dma_send
+    main.o(i.main) refers to ns_sleep.o(i.ns_sleep) for ns_sleep
+    app_usart.o(i.DMA_Channel1_2_3_4_IRQHandler) refers to n32wb03x_dma.o(i.DMA_GetFlagStatus) for DMA_GetFlagStatus
+    app_usart.o(i.DMA_Channel1_2_3_4_IRQHandler) refers to n32wb03x_dma.o(i.DMA_ClearFlag) for DMA_ClearFlag
+    app_usart.o(i.DMA_Channel1_2_3_4_IRQHandler) refers to app_usart.o(i.usart_rx_check_in_irq) for usart_rx_check_in_irq
+    app_usart.o(i.DMA_Channel1_2_3_4_IRQHandler) refers to app_usart.o(.data) for .data
+    app_usart.o(i.DMA_Configuration) refers to n32wb03x_dma.o(i.DMA_DeInit) for DMA_DeInit
+    app_usart.o(i.DMA_Configuration) refers to n32wb03x_dma.o(i.DMA_RequestRemap) for DMA_RequestRemap
+    app_usart.o(i.DMA_Configuration) refers to n32wb03x_dma.o(i.DMA_ConfigInt) for DMA_ConfigInt
+    app_usart.o(i.DMA_Configuration) refers to n32wb03x_dma.o(i.DMA_Init) for DMA_Init
+    app_usart.o(i.DMA_Configuration) refers to app_usart.o(.bss) for .bss
+    app_usart.o(i.GPIO_Configuration_USART) refers to n32wb03x_gpio.o(i.GPIO_InitStruct) for GPIO_InitStruct
+    app_usart.o(i.GPIO_Configuration_USART) refers to n32wb03x_gpio.o(i.GPIO_InitPeripheral) for GPIO_InitPeripheral
+    app_usart.o(i.NVIC_Configuration) refers to misc.o(i.NVIC_Init) for NVIC_Init
+    app_usart.o(i.RCC_Configuration_USART) refers to n32wb03x_rcc.o(i.RCC_EnableAPB2PeriphClk) for RCC_EnableAPB2PeriphClk
+    app_usart.o(i.RCC_Configuration_USART) refers to n32wb03x_rcc.o(i.RCC_EnableAHBPeriphClk) for RCC_EnableAHBPeriphClk
+    app_usart.o(i.USART1_IRQHandler) refers to n32wb03x_usart.o(i.USART_GetFlagStatus) for USART_GetFlagStatus
+    app_usart.o(i.USART1_IRQHandler) refers to app_usart.o(i.usart_rx_check_in_irq) for usart_rx_check_in_irq
+    app_usart.o(i.app_usart_configuration) refers to n32wb03x_rcc.o(i.RCC_EnableAPB2PeriphClk) for RCC_EnableAPB2PeriphClk
+    app_usart.o(i.app_usart_configuration) refers to n32wb03x_rcc.o(i.RCC_EnableAHBPeriphClk) for RCC_EnableAHBPeriphClk
+    app_usart.o(i.app_usart_configuration) refers to n32wb03x_gpio.o(i.GPIO_InitStruct) for GPIO_InitStruct
+    app_usart.o(i.app_usart_configuration) refers to n32wb03x_gpio.o(i.GPIO_InitPeripheral) for GPIO_InitPeripheral
+    app_usart.o(i.app_usart_configuration) refers to app_usart.o(i.DMA_Configuration) for DMA_Configuration
+    app_usart.o(i.app_usart_configuration) refers to misc.o(i.NVIC_Init) for NVIC_Init
+    app_usart.o(i.app_usart_configuration) refers to n32wb03x_usart.o(i.USART_Init) for USART_Init
+    app_usart.o(i.app_usart_configuration) refers to n32wb03x_usart.o(i.USART_ConfigInt) for USART_ConfigInt
+    app_usart.o(i.app_usart_configuration) refers to n32wb03x_usart.o(i.USART_EnableDMA) for USART_EnableDMA
+    app_usart.o(i.app_usart_configuration) refers to n32wb03x_dma.o(i.DMA_EnableChannel) for DMA_EnableChannel
+    app_usart.o(i.app_usart_configuration) refers to n32wb03x_usart.o(i.USART_Enable) for USART_Enable
+    app_usart.o(i.app_usart_dma_enable) refers to ns_sleep.o(i.ns_sleep_lock_release) for ns_sleep_lock_release
+    app_usart.o(i.app_usart_dma_enable) refers to n32wb03x_usart.o(i.USART_Enable) for USART_Enable
+    app_usart.o(i.app_usart_dma_enable) refers to n32wb03x_dma.o(i.DMA_EnableChannel) for DMA_EnableChannel
+    app_usart.o(i.app_usart_dma_enable) refers to n32wb03x_gpio.o(i.GPIO_InitStruct) for GPIO_InitStruct
+    app_usart.o(i.app_usart_dma_enable) refers to n32wb03x_gpio.o(i.GPIO_InitPeripheral) for GPIO_InitPeripheral
+    app_usart.o(i.app_usart_dma_enable) refers to ns_sleep.o(i.ns_sleep_lock_acquire) for ns_sleep_lock_acquire
+    app_usart.o(i.app_usart_dma_enable) refers to app_usart.o(i.app_usart_configuration) for app_usart_configuration
+    app_usart.o(i.app_usart_dma_enable) refers to app_usart.o(.data) for .data
+    app_usart.o(i.app_usart_rx_data_fifo_enter) refers to memcpya.o(.text) for __aeabi_memcpy
+    app_usart.o(i.app_usart_rx_data_fifo_enter) refers to uidiv.o(.text) for __aeabi_uidivmod
+    app_usart.o(i.app_usart_rx_data_fifo_enter) refers to printf8.o(i.__0printf$8) for __2printf
+    app_usart.o(i.app_usart_rx_data_fifo_enter) refers to app_usart.o(.data) for .data
+    app_usart.o(i.app_usart_rx_data_fifo_enter) refers to app_usart.o(.bss) for .bss
+    app_usart.o(i.app_usart_tx_fifo_enter) refers to memcpya.o(.text) for __aeabi_memcpy
+    app_usart.o(i.app_usart_tx_fifo_enter) refers to uidiv.o(.text) for __aeabi_uidivmod
+    app_usart.o(i.app_usart_tx_fifo_enter) refers to printf8.o(i.__0printf$8) for __2printf
+    app_usart.o(i.app_usart_tx_fifo_enter) refers to app_usart.o(.data) for .data
+    app_usart.o(i.app_usart_tx_fifo_enter) refers to app_usart.o(.bss) for .bss
+    app_usart.o(i.app_usart_tx_process) refers to app_usart.o(i.usart_tx_dma_send) for usart_tx_dma_send
+    app_usart.o(i.app_usart_tx_process) refers to app_usart.o(.data) for .data
+    app_usart.o(i.app_usart_tx_process) refers to app_usart.o(.bss) for .bss
+    app_usart.o(i.usart_forward_to_ble_loop) refers to app_rdtss.o(i.rdtss_send_notify) for rdtss_send_notify
+    app_usart.o(i.usart_forward_to_ble_loop) refers to uidiv.o(.text) for __aeabi_uidivmod
+    app_usart.o(i.usart_forward_to_ble_loop) refers to app_usart.o(.data) for .data
+    app_usart.o(i.usart_forward_to_ble_loop) refers to ns_ble.o(.bss) for app_env
+    app_usart.o(i.usart_forward_to_ble_loop) refers to app_usart.o(.bss) for .bss
+    app_usart.o(i.usart_rx_check_in_irq) refers to n32wb03x_dma.o(i.DMA_GetCurrDataCounter) for DMA_GetCurrDataCounter
+    app_usart.o(i.usart_rx_check_in_irq) refers to app_usart.o(i.app_usart_rx_data_fifo_enter) for app_usart_rx_data_fifo_enter
+    app_usart.o(i.usart_rx_check_in_irq) refers to app_usart.o(.data) for .data
+    app_usart.o(i.usart_rx_check_in_irq) refers to app_usart.o(.bss) for .bss
+    app_usart.o(i.usart_tx_data_blocking) refers to n32wb03x_usart.o(i.USART_SendData) for USART_SendData
+    app_usart.o(i.usart_tx_dma_send) refers to n32wb03x_dma.o(i.DMA_Init) for DMA_Init
+    app_usart.o(i.usart_tx_dma_send) refers to n32wb03x_dma.o(i.DMA_EnableChannel) for DMA_EnableChannel
+    app_usart.o(i.usart_tx_dma_send) refers to app_usart.o(.data) for .data
+    app_gpio.o(i.LedBlink) refers to n32wb03x_gpio.o(i.GPIO_TogglePin) for GPIO_TogglePin
+    app_gpio.o(i.LedInit) refers to n32wb03x_rcc.o(i.RCC_EnableAPB2PeriphClk) for RCC_EnableAPB2PeriphClk
+    app_gpio.o(i.LedInit) refers to n32wb03x_gpio.o(i.GPIO_InitStruct) for GPIO_InitStruct
+    app_gpio.o(i.LedInit) refers to n32wb03x_gpio.o(i.GPIO_InitPeripheral) for GPIO_InitPeripheral
+    app_gpio.o(i.LedOff) refers to n32wb03x_gpio.o(i.GPIO_ResetBits) for GPIO_ResetBits
+    app_gpio.o(i.LedOn) refers to n32wb03x_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000F) for __rt_final_cpp
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$00000011) for __rt_final_exit
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry12b.o(.ARM.Collect$$$$0000000E) for __rt_lib_shutdown_fini
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry8b.o(.ARM.Collect$$$$0000000A) for _main_cpp_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry9a.o(.ARM.Collect$$$$0000000B) for _main_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry5.o(.ARM.Collect$$$$00000004) for _main_scatterload
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry2.o(.ARM.Collect$$$$00000001) for _main_stk
+    idiv.o(.text) refers to uidiv.o(.text) for __aeabi_uidivmod
+    uldiv.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    uldiv.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    rand.o(.text) refers to rand.o(.data) for .data
+    printfb.o(i.__0fprintf$bare) refers to printfb.o(i._printf_core) for _printf_core
+    printfb.o(i.__0fprintf$bare) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printfb.o(i.__0printf$bare) refers to printfb.o(i._printf_core) for _printf_core
+    printfb.o(i.__0printf$bare) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printfb.o(i.__0snprintf$bare) refers to printfb.o(i._printf_core) for _printf_core
+    printfb.o(i.__0snprintf$bare) refers to printfb.o(i._snputc) for _snputc
+    printfb.o(i.__0sprintf$bare) refers to printfb.o(i._printf_core) for _printf_core
+    printfb.o(i.__0sprintf$bare) refers to printfb.o(i._sputc) for _sputc
+    printfb.o(i.__0vfprintf$bare) refers to printfb.o(i._printf_core) for _printf_core
+    printfb.o(i.__0vfprintf$bare) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printfb.o(i.__0vprintf$bare) refers to printfb.o(i._printf_core) for _printf_core
+    printfb.o(i.__0vprintf$bare) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printfb.o(i.__0vsnprintf$bare) refers to printfb.o(i._printf_core) for _printf_core
+    printfb.o(i.__0vsnprintf$bare) refers to printfb.o(i._snputc) for _snputc
+    printfb.o(i.__0vsprintf$bare) refers to printfb.o(i._printf_core) for _printf_core
+    printfb.o(i.__0vsprintf$bare) refers to printfb.o(i._sputc) for _sputc
+    printf0.o(i.__0fprintf$0) refers to printf0.o(i._printf_core) for _printf_core
+    printf0.o(i.__0fprintf$0) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf0.o(i.__0printf$0) refers to printf0.o(i._printf_core) for _printf_core
+    printf0.o(i.__0printf$0) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf0.o(i.__0snprintf$0) refers to printf0.o(i._printf_core) for _printf_core
+    printf0.o(i.__0snprintf$0) refers to printf0.o(i._snputc) for _snputc
+    printf0.o(i.__0sprintf$0) refers to printf0.o(i._printf_core) for _printf_core
+    printf0.o(i.__0sprintf$0) refers to printf0.o(i._sputc) for _sputc
+    printf0.o(i.__0vfprintf$0) refers to printf0.o(i._printf_core) for _printf_core
+    printf0.o(i.__0vfprintf$0) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf0.o(i.__0vprintf$0) refers to printf0.o(i._printf_core) for _printf_core
+    printf0.o(i.__0vprintf$0) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf0.o(i.__0vsnprintf$0) refers to printf0.o(i._printf_core) for _printf_core
+    printf0.o(i.__0vsnprintf$0) refers to printf0.o(i._snputc) for _snputc
+    printf0.o(i.__0vsprintf$0) refers to printf0.o(i._printf_core) for _printf_core
+    printf0.o(i.__0vsprintf$0) refers to printf0.o(i._sputc) for _sputc
+    printf1.o(i.__0fprintf$1) refers to printf1.o(i._printf_core) for _printf_core
+    printf1.o(i.__0fprintf$1) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf1.o(i.__0printf$1) refers to printf1.o(i._printf_core) for _printf_core
+    printf1.o(i.__0printf$1) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf1.o(i.__0snprintf$1) refers to printf1.o(i._printf_core) for _printf_core
+    printf1.o(i.__0snprintf$1) refers to printf1.o(i._snputc) for _snputc
+    printf1.o(i.__0sprintf$1) refers to printf1.o(i._printf_core) for _printf_core
+    printf1.o(i.__0sprintf$1) refers to printf1.o(i._sputc) for _sputc
+    printf1.o(i.__0vfprintf$1) refers to printf1.o(i._printf_core) for _printf_core
+    printf1.o(i.__0vfprintf$1) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf1.o(i.__0vprintf$1) refers to printf1.o(i._printf_core) for _printf_core
+    printf1.o(i.__0vprintf$1) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf1.o(i.__0vsnprintf$1) refers to printf1.o(i._printf_core) for _printf_core
+    printf1.o(i.__0vsnprintf$1) refers to printf1.o(i._snputc) for _snputc
+    printf1.o(i.__0vsprintf$1) refers to printf1.o(i._printf_core) for _printf_core
+    printf1.o(i.__0vsprintf$1) refers to printf1.o(i._sputc) for _sputc
+    printf1.o(i._printf_core) refers to uidiv.o(.text) for __aeabi_uidivmod
+    printf2.o(i.__0fprintf$2) refers to printf2.o(i._printf_core) for _printf_core
+    printf2.o(i.__0fprintf$2) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf2.o(i.__0printf$2) refers to printf2.o(i._printf_core) for _printf_core
+    printf2.o(i.__0printf$2) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf2.o(i.__0snprintf$2) refers to printf2.o(i._printf_core) for _printf_core
+    printf2.o(i.__0snprintf$2) refers to printf2.o(i._snputc) for _snputc
+    printf2.o(i.__0sprintf$2) refers to printf2.o(i._printf_core) for _printf_core
+    printf2.o(i.__0sprintf$2) refers to printf2.o(i._sputc) for _sputc
+    printf2.o(i.__0vfprintf$2) refers to printf2.o(i._printf_core) for _printf_core
+    printf2.o(i.__0vfprintf$2) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf2.o(i.__0vprintf$2) refers to printf2.o(i._printf_core) for _printf_core
+    printf2.o(i.__0vprintf$2) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf2.o(i.__0vsnprintf$2) refers to printf2.o(i._printf_core) for _printf_core
+    printf2.o(i.__0vsnprintf$2) refers to printf2.o(i._snputc) for _snputc
+    printf2.o(i.__0vsprintf$2) refers to printf2.o(i._printf_core) for _printf_core
+    printf2.o(i.__0vsprintf$2) refers to printf2.o(i._sputc) for _sputc
+    printf3.o(i.__0fprintf$3) refers to printf3.o(i._printf_core) for _printf_core
+    printf3.o(i.__0fprintf$3) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf3.o(i.__0printf$3) refers to printf3.o(i._printf_core) for _printf_core
+    printf3.o(i.__0printf$3) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf3.o(i.__0snprintf$3) refers to printf3.o(i._printf_core) for _printf_core
+    printf3.o(i.__0snprintf$3) refers to printf3.o(i._snputc) for _snputc
+    printf3.o(i.__0sprintf$3) refers to printf3.o(i._printf_core) for _printf_core
+    printf3.o(i.__0sprintf$3) refers to printf3.o(i._sputc) for _sputc
+    printf3.o(i.__0vfprintf$3) refers to printf3.o(i._printf_core) for _printf_core
+    printf3.o(i.__0vfprintf$3) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf3.o(i.__0vprintf$3) refers to printf3.o(i._printf_core) for _printf_core
+    printf3.o(i.__0vprintf$3) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf3.o(i.__0vsnprintf$3) refers to printf3.o(i._printf_core) for _printf_core
+    printf3.o(i.__0vsnprintf$3) refers to printf3.o(i._snputc) for _snputc
+    printf3.o(i.__0vsprintf$3) refers to printf3.o(i._printf_core) for _printf_core
+    printf3.o(i.__0vsprintf$3) refers to printf3.o(i._sputc) for _sputc
+    printf3.o(i._printf_core) refers to uidiv.o(.text) for __aeabi_uidivmod
+    printf4.o(i.__0fprintf$4) refers to printf4.o(i._printf_core) for _printf_core
+    printf4.o(i.__0fprintf$4) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf4.o(i.__0printf$4) refers to printf4.o(i._printf_core) for _printf_core
+    printf4.o(i.__0printf$4) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf4.o(i.__0snprintf$4) refers to printf4.o(i._printf_core) for _printf_core
+    printf4.o(i.__0snprintf$4) refers to printf4.o(i._snputc) for _snputc
+    printf4.o(i.__0sprintf$4) refers to printf4.o(i._printf_core) for _printf_core
+    printf4.o(i.__0sprintf$4) refers to printf4.o(i._sputc) for _sputc
+    printf4.o(i.__0vfprintf$4) refers to printf4.o(i._printf_core) for _printf_core
+    printf4.o(i.__0vfprintf$4) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf4.o(i.__0vprintf$4) refers to printf4.o(i._printf_core) for _printf_core
+    printf4.o(i.__0vprintf$4) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf4.o(i.__0vsnprintf$4) refers to printf4.o(i._printf_core) for _printf_core
+    printf4.o(i.__0vsnprintf$4) refers to printf4.o(i._snputc) for _snputc
+    printf4.o(i.__0vsprintf$4) refers to printf4.o(i._printf_core) for _printf_core
+    printf4.o(i.__0vsprintf$4) refers to printf4.o(i._sputc) for _sputc
+    printf4.o(i._printf_core) refers to uldiv.o(.text) for __aeabi_uldivmod
+    printf5.o(i.__0fprintf$5) refers to printf5.o(i._printf_core) for _printf_core
+    printf5.o(i.__0fprintf$5) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf5.o(i.__0printf$5) refers to printf5.o(i._printf_core) for _printf_core
+    printf5.o(i.__0printf$5) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf5.o(i.__0snprintf$5) refers to printf5.o(i._printf_core) for _printf_core
+    printf5.o(i.__0snprintf$5) refers to printf5.o(i._snputc) for _snputc
+    printf5.o(i.__0sprintf$5) refers to printf5.o(i._printf_core) for _printf_core
+    printf5.o(i.__0sprintf$5) refers to printf5.o(i._sputc) for _sputc
+    printf5.o(i.__0vfprintf$5) refers to printf5.o(i._printf_core) for _printf_core
+    printf5.o(i.__0vfprintf$5) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf5.o(i.__0vprintf$5) refers to printf5.o(i._printf_core) for _printf_core
+    printf5.o(i.__0vprintf$5) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf5.o(i.__0vsnprintf$5) refers to printf5.o(i._printf_core) for _printf_core
+    printf5.o(i.__0vsnprintf$5) refers to printf5.o(i._snputc) for _snputc
+    printf5.o(i.__0vsprintf$5) refers to printf5.o(i._printf_core) for _printf_core
+    printf5.o(i.__0vsprintf$5) refers to printf5.o(i._sputc) for _sputc
+    printf5.o(i._printf_core) refers to uldiv.o(.text) for __aeabi_uldivmod
+    printf6.o(i.__0fprintf$6) refers to printf6.o(i._printf_core) for _printf_core
+    printf6.o(i.__0fprintf$6) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf6.o(i.__0printf$6) refers to printf6.o(i._printf_core) for _printf_core
+    printf6.o(i.__0printf$6) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf6.o(i.__0snprintf$6) refers to printf6.o(i._printf_core) for _printf_core
+    printf6.o(i.__0snprintf$6) refers to printf6.o(i._snputc) for _snputc
+    printf6.o(i.__0sprintf$6) refers to printf6.o(i._printf_core) for _printf_core
+    printf6.o(i.__0sprintf$6) refers to printf6.o(i._sputc) for _sputc
+    printf6.o(i.__0vfprintf$6) refers to printf6.o(i._printf_core) for _printf_core
+    printf6.o(i.__0vfprintf$6) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf6.o(i.__0vprintf$6) refers to printf6.o(i._printf_core) for _printf_core
+    printf6.o(i.__0vprintf$6) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf6.o(i.__0vsnprintf$6) refers to printf6.o(i._printf_core) for _printf_core
+    printf6.o(i.__0vsnprintf$6) refers to printf6.o(i._snputc) for _snputc
+    printf6.o(i.__0vsprintf$6) refers to printf6.o(i._printf_core) for _printf_core
+    printf6.o(i.__0vsprintf$6) refers to printf6.o(i._sputc) for _sputc
+    printf6.o(i._printf_core) refers to printf6.o(i._printf_pre_padding) for _printf_pre_padding
+    printf6.o(i._printf_core) refers to printf6.o(i._printf_post_padding) for _printf_post_padding
+    printf6.o(i._printf_core) refers to uidiv.o(.text) for __aeabi_uidivmod
+    printf7.o(i.__0fprintf$7) refers to printf7.o(i._printf_core) for _printf_core
+    printf7.o(i.__0fprintf$7) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf7.o(i.__0printf$7) refers to printf7.o(i._printf_core) for _printf_core
+    printf7.o(i.__0printf$7) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf7.o(i.__0snprintf$7) refers to printf7.o(i._printf_core) for _printf_core
+    printf7.o(i.__0snprintf$7) refers to printf7.o(i._snputc) for _snputc
+    printf7.o(i.__0sprintf$7) refers to printf7.o(i._printf_core) for _printf_core
+    printf7.o(i.__0sprintf$7) refers to printf7.o(i._sputc) for _sputc
+    printf7.o(i.__0vfprintf$7) refers to printf7.o(i._printf_core) for _printf_core
+    printf7.o(i.__0vfprintf$7) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf7.o(i.__0vprintf$7) refers to printf7.o(i._printf_core) for _printf_core
+    printf7.o(i.__0vprintf$7) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf7.o(i.__0vsnprintf$7) refers to printf7.o(i._printf_core) for _printf_core
+    printf7.o(i.__0vsnprintf$7) refers to printf7.o(i._snputc) for _snputc
+    printf7.o(i.__0vsprintf$7) refers to printf7.o(i._printf_core) for _printf_core
+    printf7.o(i.__0vsprintf$7) refers to printf7.o(i._sputc) for _sputc
+    printf7.o(i._printf_core) refers to printf7.o(i._printf_pre_padding) for _printf_pre_padding
+    printf7.o(i._printf_core) refers to printf7.o(i._printf_post_padding) for _printf_post_padding
+    printf7.o(i._printf_core) refers to uldiv.o(.text) for __aeabi_uldivmod
+    printf8.o(i.__0fprintf$8) refers to printf8.o(i._printf_core) for _printf_core
+    printf8.o(i.__0fprintf$8) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf8.o(i.__0printf$8) refers to printf8.o(i._printf_core) for _printf_core
+    printf8.o(i.__0printf$8) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf8.o(i.__0snprintf$8) refers to printf8.o(i._printf_core) for _printf_core
+    printf8.o(i.__0snprintf$8) refers to printf8.o(i._snputc) for _snputc
+    printf8.o(i.__0sprintf$8) refers to printf8.o(i._printf_core) for _printf_core
+    printf8.o(i.__0sprintf$8) refers to printf8.o(i._sputc) for _sputc
+    printf8.o(i.__0vfprintf$8) refers to printf8.o(i._printf_core) for _printf_core
+    printf8.o(i.__0vfprintf$8) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf8.o(i.__0vprintf$8) refers to printf8.o(i._printf_core) for _printf_core
+    printf8.o(i.__0vprintf$8) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printf8.o(i.__0vsnprintf$8) refers to printf8.o(i._printf_core) for _printf_core
+    printf8.o(i.__0vsnprintf$8) refers to printf8.o(i._snputc) for _snputc
+    printf8.o(i.__0vsprintf$8) refers to printf8.o(i._printf_core) for _printf_core
+    printf8.o(i.__0vsprintf$8) refers to printf8.o(i._sputc) for _sputc
+    printf8.o(i._printf_core) refers to printf8.o(i._printf_pre_padding) for _printf_pre_padding
+    printf8.o(i._printf_core) refers to printf8.o(i._printf_post_padding) for _printf_post_padding
+    printf8.o(i._printf_core) refers to uldiv.o(.text) for __aeabi_uldivmod
+    printfa.o(i.__0fprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0fprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0fprintf) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printfa.o(i.__0printf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0printf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0printf) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printfa.o(i.__0snprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0snprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0snprintf) refers to printfa.o(i._snputc) for _snputc
+    printfa.o(i.__0sprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0sprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0sprintf) refers to printfa.o(i._sputc) for _sputc
+    printfa.o(i.__0vfprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0vfprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0vfprintf) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printfa.o(i.__0vprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0vprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0vprintf) refers to ns_log_lpuart.o(i.fputc) for fputc
+    printfa.o(i.__0vsnprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0vsnprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0vsnprintf) refers to printfa.o(i._snputc) for _snputc
+    printfa.o(i.__0vsprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0vsprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0vsprintf) refers to printfa.o(i._sputc) for _sputc
+    printfa.o(i._fp_digits) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i._fp_digits) refers to dmul.o(.text) for __aeabi_dmul
+    printfa.o(i._fp_digits) refers to ddiv.o(.text) for __aeabi_ddiv
+    printfa.o(i._fp_digits) refers to cdrcmple.o(.text) for __aeabi_cdrcmple
+    printfa.o(i._fp_digits) refers to dadd.o(.text) for __aeabi_dadd
+    printfa.o(i._fp_digits) refers to dfixul.o(.text) for __aeabi_d2ulz
+    printfa.o(i._fp_digits) refers to uldiv.o(.text) for __aeabi_uldivmod
+    printfa.o(i._printf_core) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i._printf_core) refers to printfa.o(i._printf_pre_padding) for _printf_pre_padding
+    printfa.o(i._printf_core) refers to uldiv.o(.text) for __aeabi_uldivmod
+    printfa.o(i._printf_core) refers to printfa.o(i._printf_post_padding) for _printf_post_padding
+    printfa.o(i._printf_core) refers to printfa.o(i._fp_digits) for _fp_digits
+    printfa.o(i._printf_core) refers to uidiv.o(.text) for __aeabi_uidivmod
+    printfa.o(i._printf_post_padding) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i._printf_pre_padding) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i._snputc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i._sputc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fadd.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fadd.o(.text) refers to fepilogue.o(.text) for _float_epilogue
+    fmul.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fdiv.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fdiv.o(.text) refers to fepilogue.o(.text) for _float_round
+    dadd.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    dadd.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    dadd.o(.text) refers to llsshr.o(.text) for __aeabi_lasr
+    dadd.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    ddiv.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    ddiv.o(.text) refers to depilogue.o(.text) for _double_round
+    fflti.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fflti.o(.text) refers to fepilogue.o(.text) for _float_epilogue
+    ffltui.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    ffltui.o(.text) refers to fepilogue.o(.text) for _float_epilogue
+    ffltul.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    ffltul.o(.text) refers to fepilogue.o(.text) for _float_epilogue
+    ffixui.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    ffixul.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    ffixul.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    f2d.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    d2f.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    d2f.o(.text) refers to fepilogue.o(.text) for _float_round
+    entry2.o(.ARM.Collect$$$$00000001) refers to entry2.o(.ARM.Collect$$$$00002712) for __lit__00000000
+    entry2.o(.ARM.Collect$$$$00002712) refers to startup_n32wb03x.o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to startup_n32wb03x.o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    entry5.o(.ARM.Collect$$$$00000004) refers to init.o(.text) for __scatterload
+    entry9a.o(.ARM.Collect$$$$0000000B) refers to main.o(i.main) for main
+    entry9b.o(.ARM.Collect$$$$0000000C) refers to main.o(i.main) for main
+    depilogue.o(.text) refers to depilogue.o(i.__ARM_clz) for __ARM_clz
+    depilogue.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    depilogue.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    dmul.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    dfixul.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    dfixul.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    init.o(.text) refers to entry5.o(.ARM.Collect$$$$00000004) for __main_after_scatterload
+    ns_sec.o(i.co_rand_word) refers to rand.o(.text) for rand
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing startup_n32wb03x.o(HEAP), (512 bytes).
+    Removing system_n32wb03x.o(.emb_text), (8 bytes).
+    Removing system_n32wb03x.o(i.SystemCoreClockUpdate), (16 bytes).
+    Removing system_n32wb03x.o(i.SystemGetUUID), (48 bytes).
+    Removing system_n32wb03x.o(i.SystemTrimValueGet), (44 bytes).
+    Removing system_n32wb03x.o(i.system_delay_n_10us), (12 bytes).
+    Removing system_n32wb03x.o(.data), (4 bytes).
+    Removing misc.o(.emb_text), (8 bytes).
+    Removing misc.o(i.SysTick_CLKSourceConfig), (24 bytes).
+    Removing n32wb03x_adc.o(.emb_text), (8 bytes).
+    Removing n32wb03x_adc.o(i.ADC16Bit_ConverValueToVoltage), (152 bytes).
+    Removing n32wb03x_adc.o(i.ADC_ClearFlag), (6 bytes).
+    Removing n32wb03x_adc.o(i.ADC_ConfigAnalogWatchdogThresholds), (24 bytes).
+    Removing n32wb03x_adc.o(i.ADC_ConfigChannel), (14 bytes).
+    Removing n32wb03x_adc.o(i.ADC_ConfigContinuousMode), (18 bytes).
+    Removing n32wb03x_adc.o(i.ADC_ConfigEDThreshold), (34 bytes).
+    Removing n32wb03x_adc.o(i.ADC_ConfigInt), (16 bytes).
+    Removing n32wb03x_adc.o(i.ADC_ConfigVoiceZcrThresholds), (20 bytes).
+    Removing n32wb03x_adc.o(i.ADC_ConverValueToTemperature), (84 bytes).
+    Removing n32wb03x_adc.o(i.ADC_ConverValueToVoltage), (136 bytes).
+    Removing n32wb03x_adc.o(i.ADC_DeInit), (84 bytes).
+    Removing n32wb03x_adc.o(i.ADC_Enable), (20 bytes).
+    Removing n32wb03x_adc.o(i.ADC_EnableAUDIOPGA), (18 bytes).
+    Removing n32wb03x_adc.o(i.ADC_EnableAWD), (18 bytes).
+    Removing n32wb03x_adc.o(i.ADC_EnableBypassFilter), (80 bytes).
+    Removing n32wb03x_adc.o(i.ADC_EnableDMA), (18 bytes).
+    Removing n32wb03x_adc.o(i.ADC_EnableEnergy), (18 bytes).
+    Removing n32wb03x_adc.o(i.ADC_EnableMICBIAS), (20 bytes).
+    Removing n32wb03x_adc.o(i.ADC_EnablePGA), (20 bytes).
+    Removing n32wb03x_adc.o(i.ADC_EnableTS), (18 bytes).
+    Removing n32wb03x_adc.o(i.ADC_EnableZeroCross), (20 bytes).
+    Removing n32wb03x_adc.o(i.ADC_GetDat), (6 bytes).
+    Removing n32wb03x_adc.o(i.ADC_GetFlagStatus), (14 bytes).
+    Removing n32wb03x_adc.o(i.ADC_SetAUDIOAmplitude), (20 bytes).
+    Removing n32wb03x_adc.o(i.ADC_SetAUDIOCurrent), (20 bytes).
+    Removing n32wb03x_adc.o(i.ADC_SetMICOutputVoltage), (20 bytes).
+    Removing n32wb03x_adc.o(i.ADC_SetNoiseOffset), (16 bytes).
+    Removing n32wb03x_adc.o(i.ADC_SetOverSampleCounter), (24 bytes).
+    Removing n32wb03x_adc.o(i.ADC_SetPGAGain), (20 bytes).
+    Removing n32wb03x_crc.o(.emb_text), (8 bytes).
+    Removing n32wb03x_crc.o(i.CRC16_CalcBufCrc), (32 bytes).
+    Removing n32wb03x_crc.o(i.CRC16_CalcCRC), (12 bytes).
+    Removing n32wb03x_crc.o(i.CRC32_CalcBufCrc), (32 bytes).
+    Removing n32wb03x_crc.o(i.CRC32_CalcCrc), (12 bytes).
+    Removing n32wb03x_crc.o(i.CRC32_GetCrc), (12 bytes).
+    Removing n32wb03x_crc.o(i.CRC32_GetIDat), (12 bytes).
+    Removing n32wb03x_crc.o(i.CRC32_ResetCrc), (12 bytes).
+    Removing n32wb03x_crc.o(i.CRC32_SetIDat), (12 bytes).
+    Removing n32wb03x_crc.o(i.__CRC16_CalcCrc), (12 bytes).
+    Removing n32wb03x_crc.o(i.__CRC16_GetCrc), (12 bytes).
+    Removing n32wb03x_crc.o(i.__CRC16_GetLRC), (12 bytes).
+    Removing n32wb03x_crc.o(i.__CRC16_SetBigEndianFmt), (16 bytes).
+    Removing n32wb03x_crc.o(i.__CRC16_SetCleanDisable), (16 bytes).
+    Removing n32wb03x_crc.o(i.__CRC16_SetCleanEnable), (16 bytes).
+    Removing n32wb03x_crc.o(i.__CRC16_SetCrc), (12 bytes).
+    Removing n32wb03x_crc.o(i.__CRC16_SetLRC), (12 bytes).
+    Removing n32wb03x_crc.o(i.__CRC16_SetLittleEndianFmt), (16 bytes).
+    Removing n32wb03x_dma.o(.emb_text), (8 bytes).
+    Removing n32wb03x_dma.o(i.DMA_ClrIntPendingBit), (4 bytes).
+    Removing n32wb03x_dma.o(i.DMA_GetIntStatus), (14 bytes).
+    Removing n32wb03x_dma.o(i.DMA_SetCurrDataCounter), (4 bytes).
+    Removing n32wb03x_dma.o(i.DMA_StructInit), (26 bytes).
+    Removing n32wb03x_exti.o(.emb_text), (8 bytes).
+    Removing n32wb03x_exti.o(i.EXTI_ClrStatusFlag), (12 bytes).
+    Removing n32wb03x_exti.o(i.EXTI_DeInit), (28 bytes).
+    Removing n32wb03x_exti.o(i.EXTI_GetStatusFlag), (20 bytes).
+    Removing n32wb03x_exti.o(i.EXTI_InitStruct), (14 bytes).
+    Removing n32wb03x_exti.o(i.EXTI_TriggerSWInt), (16 bytes).
+    Removing n32wb03x_gpio.o(.emb_text), (8 bytes).
+    Removing n32wb03x_gpio.o(i.AFIO_ConfigSPINSSMode), (24 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_AFIOInitDefault), (20 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_ConfigEXTILine), (340 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_ConfigPinLock), (18 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_ConfigPinRemap), (60 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_DeInit), (56 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_DeInitPin), (100 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_ReadInputData), (6 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_ReadInputDataBit), (14 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_ReadOutputData), (6 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_ReadOutputDataBit), (14 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_TogglePin), (8 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_Write), (4 bytes).
+    Removing n32wb03x_gpio.o(i.GPIO_WriteBit), (12 bytes).
+    Removing n32wb03x_rcc.o(.emb_text), (8 bytes).
+    Removing n32wb03x_rcc.o(i.DBG_ConfigPeriph), (24 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ClrFlag), (24 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ClrIntPendingBit), (16 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigAdcClk), (20 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigHclk), (20 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigHse), (28 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigHsi), (28 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigInt), (24 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigLSXSEL), (24 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigLse), (40 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigMco), (24 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigPclk1), (20 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigPclk2), (24 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigSysclk), (20 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_ConfigTim1Clk), (20 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_DeInit), (76 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_EnableAHBPeriphReset), (24 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_EnableAPB1PeriphClk), (24 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_EnableAPB1PeriphReset), (24 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_EnableAPB2PeriphReset), (24 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_EnableHsi), (28 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_EnableLsi), (28 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_EnableRTCReset), (28 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_EnableRtcClk), (28 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_Enable_ADC_CLK_SRC_AUDIOPLL), (28 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_GetFlagStatus), (48 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_GetIntStatus), (20 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_GetRTCClkSrc), (16 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_GetSysclkSrc), (16 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_WaitHseStable), (56 bytes).
+    Removing n32wb03x_rcc.o(i.RCC_WaitHsiStable), (56 bytes).
+    Removing n32wb03x_tim.o(.emb_text), (8 bytes).
+    Removing n32wb03x_tim.o(i.ConfigTI1), (76 bytes).
+    Removing n32wb03x_tim.o(i.ConfigTI2), (84 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ClearFlag), (8 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ClrIntPendingBit), (8 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ClrOc1Ref), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ClrOc2Ref), (14 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ClrOc3Ref), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ClrOc4Ref), (14 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigArPreload), (18 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigBkdt), (88 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigCntMode), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigDma), (8 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigEncoderInterface), (52 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigExtClkMode1), (38 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigExtClkMode2), (30 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigExtTrig), (20 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigExtTrigAsClk), (50 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigForcedOc1), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigForcedOc2), (20 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigForcedOc3), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigForcedOc4), (20 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigInt), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigInternalClk), (10 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigInternalTrigToExt), (20 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc1Fast), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc1NPolarity), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc1Polarity), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc2Fast), (20 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc2NPolarity), (14 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc2Polarity), (14 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc2Preload), (20 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc3Fast), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc3NPolarity), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc3Polarity), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc3Preload), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc4Fast), (20 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc4Polarity), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigOc4Preload), (20 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigPrescaler), (6 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigPwmIc), (144 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ConfigUpdateRequestIntSrc), (18 bytes).
+    Removing n32wb03x_tim.o(i.TIM_DeInit), (84 bytes).
+    Removing n32wb03x_tim.o(i.TIM_Enable), (20 bytes).
+    Removing n32wb03x_tim.o(i.TIM_EnableCapCmpCh), (26 bytes).
+    Removing n32wb03x_tim.o(i.TIM_EnableCapCmpChN), (26 bytes).
+    Removing n32wb03x_tim.o(i.TIM_EnableCapCmpPreloadControl), (20 bytes).
+    Removing n32wb03x_tim.o(i.TIM_EnableCtrlPwmOutputs), (24 bytes).
+    Removing n32wb03x_tim.o(i.TIM_EnableDma), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_EnableOc1Preload), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_EnableUpdateEvt), (18 bytes).
+    Removing n32wb03x_tim.o(i.TIM_GenerateEvent), (4 bytes).
+    Removing n32wb03x_tim.o(i.TIM_GetCap1), (4 bytes).
+    Removing n32wb03x_tim.o(i.TIM_GetCap2), (4 bytes).
+    Removing n32wb03x_tim.o(i.TIM_GetCap3), (4 bytes).
+    Removing n32wb03x_tim.o(i.TIM_GetCap4), (6 bytes).
+    Removing n32wb03x_tim.o(i.TIM_GetCnt), (4 bytes).
+    Removing n32wb03x_tim.o(i.TIM_GetFlagStatus), (14 bytes).
+    Removing n32wb03x_tim.o(i.TIM_GetIntStatus), (24 bytes).
+    Removing n32wb03x_tim.o(i.TIM_GetPrescaler), (4 bytes).
+    Removing n32wb03x_tim.o(i.TIM_ICInit), (288 bytes).
+    Removing n32wb03x_tim.o(i.TIM_InitBkdtStruct), (18 bytes).
+    Removing n32wb03x_tim.o(i.TIM_InitIcStruct), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_InitOc1), (96 bytes).
+    Removing n32wb03x_tim.o(i.TIM_InitOc2), (112 bytes).
+    Removing n32wb03x_tim.o(i.TIM_InitOc3), (112 bytes).
+    Removing n32wb03x_tim.o(i.TIM_InitOc4), (92 bytes).
+    Removing n32wb03x_tim.o(i.TIM_InitOcStruct), (20 bytes).
+    Removing n32wb03x_tim.o(i.TIM_InitTimBaseStruct), (28 bytes).
+    Removing n32wb03x_tim.o(i.TIM_InitTimeBase), (176 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SelectCapCmpDmaSrc), (18 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SelectComEvt), (18 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SelectHallSensor), (18 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SelectInputTrig), (12 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SelectMasterSlaveMode), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SelectOcMode), (82 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SelectOnePulseMode), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SelectOutputTrig), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SelectSlaveMode), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SetAutoReload), (4 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SetClkDiv), (18 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SetCmp1), (4 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SetCmp2), (4 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SetCmp3), (4 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SetCmp4), (6 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SetCnt), (4 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SetInCap1Prescaler), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SetInCap2Prescaler), (24 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SetInCap3Prescaler), (16 bytes).
+    Removing n32wb03x_tim.o(i.TIM_SetInCap4Prescaler), (24 bytes).
+    Removing n32wb03x_usart.o(.emb_text), (8 bytes).
+    Removing n32wb03x_usart.o(i.USART_ClockInit), (36 bytes).
+    Removing n32wb03x_usart.o(i.USART_ClockStructInit), (12 bytes).
+    Removing n32wb03x_usart.o(i.USART_ClrFlag), (6 bytes).
+    Removing n32wb03x_usart.o(i.USART_ClrIntPendingBit), (12 bytes).
+    Removing n32wb03x_usart.o(i.USART_ConfigIrDAMode), (16 bytes).
+    Removing n32wb03x_usart.o(i.USART_ConfigLINBreakDetectLength), (16 bytes).
+    Removing n32wb03x_usart.o(i.USART_ConfigWakeUpMode), (20 bytes).
+    Removing n32wb03x_usart.o(i.USART_DeInit), (52 bytes).
+    Removing n32wb03x_usart.o(i.USART_EnableHalfDuplex), (18 bytes).
+    Removing n32wb03x_usart.o(i.USART_EnableIrDA), (18 bytes).
+    Removing n32wb03x_usart.o(i.USART_EnableLIN), (28 bytes).
+    Removing n32wb03x_usart.o(i.USART_EnableRcvWakeUp), (18 bytes).
+    Removing n32wb03x_usart.o(i.USART_EnableSmartCard), (18 bytes).
+    Removing n32wb03x_usart.o(i.USART_GetIntStatus), (64 bytes).
+    Removing n32wb03x_usart.o(i.USART_ReceiveData), (8 bytes).
+    Removing n32wb03x_usart.o(i.USART_SendBreak), (10 bytes).
+    Removing n32wb03x_usart.o(i.USART_SendData), (8 bytes).
+    Removing n32wb03x_usart.o(i.USART_SetAddr), (16 bytes).
+    Removing n32wb03x_usart.o(i.USART_SetGuardTime), (16 bytes).
+    Removing n32wb03x_usart.o(i.USART_SetPrescaler), (16 bytes).
+    Removing n32wb03x_usart.o(i.USART_SetSmartCardNACK), (18 bytes).
+    Removing n32wb03x_usart.o(i.USART_StructInit), (22 bytes).
+    Removing n32wb03x_spi.o(.emb_text), (8 bytes).
+    Removing n32wb03x_spi.o(i.I2S_Enable), (28 bytes).
+    Removing n32wb03x_spi.o(i.I2S_Init), (132 bytes).
+    Removing n32wb03x_spi.o(i.I2S_InitStruct), (16 bytes).
+    Removing n32wb03x_spi.o(i.SPI_ConfigBidirectionalMode), (28 bytes).
+    Removing n32wb03x_spi.o(i.SPI_ConfigDataLen), (20 bytes).
+    Removing n32wb03x_spi.o(i.SPI_Enable), (18 bytes).
+    Removing n32wb03x_spi.o(i.SPI_EnableCalculateCrc), (28 bytes).
+    Removing n32wb03x_spi.o(i.SPI_GetCRCDat), (12 bytes).
+    Removing n32wb03x_spi.o(i.SPI_GetCRCPoly), (4 bytes).
+    Removing n32wb03x_spi.o(i.SPI_I2S_ClrCRCErrFlag), (6 bytes).
+    Removing n32wb03x_spi.o(i.SPI_I2S_ClrITPendingBit), (14 bytes).
+    Removing n32wb03x_spi.o(i.SPI_I2S_DeInit), (52 bytes).
+    Removing n32wb03x_spi.o(i.SPI_I2S_EnableDma), (16 bytes).
+    Removing n32wb03x_spi.o(i.SPI_I2S_EnableInt), (24 bytes).
+    Removing n32wb03x_spi.o(i.SPI_I2S_GetIntStatus), (44 bytes).
+    Removing n32wb03x_spi.o(i.SPI_I2S_GetStatus), (14 bytes).
+    Removing n32wb03x_spi.o(i.SPI_I2S_ReceiveData), (4 bytes).
+    Removing n32wb03x_spi.o(i.SPI_I2S_TransmitData), (4 bytes).
+    Removing n32wb03x_spi.o(i.SPI_Init), (64 bytes).
+    Removing n32wb03x_spi.o(i.SPI_InitStruct), (24 bytes).
+    Removing n32wb03x_spi.o(i.SPI_SSOutputEnable), (18 bytes).
+    Removing n32wb03x_spi.o(i.SPI_SetNssLevel), (28 bytes).
+    Removing n32wb03x_spi.o(i.SPI_TransmitCrcNext), (12 bytes).
+    Removing n32wb03x_lpuart.o(.emb_text), (8 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_ClrIntPendingBit), (6 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_ConfigInt), (16 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_ConfigSamplingMethod), (16 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_ConfigWakeUpData), (4 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_ConfigWakeUpMethod), (20 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_EnableDMA), (16 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_EnableLoopBack), (18 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_EnableWakeUpStop), (24 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_FlushRxFifo), (32 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_GetIntStatus), (38 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_ReceiveData), (4 bytes).
+    Removing n32wb03x_lpuart.o(i.LPUART_StructInit), (24 bytes).
+    Removing n32wb03x_qflash.o(.emb_text), (8 bytes).
+    Removing n32wb03x_qflash.o(i.OTPTrim_Erase), (84 bytes).
+    Removing n32wb03x_qflash.o(i.OTPTrim_Lock), (84 bytes).
+    Removing n32wb03x_qflash.o(i.OTPTrim_Read), (88 bytes).
+    Removing n32wb03x_qflash.o(i.OTPTrim_Write), (128 bytes).
+    Removing n32wb03x_qflash.o(i.Qflash_Read), (36 bytes).
+    Removing lib_att.o(.emb_text), (8 bytes).
+    Removing lib_att.o(i.attm_att_set_permission), (184 bytes).
+    Removing lib_att.o(i.attm_reserve_handle_range), (32 bytes).
+    Removing rwip.o(.emb_text), (8 bytes).
+    Removing rwip.o(i.rwip_reset), (136 bytes).
+    Removing rwip_driver.o(.emb_text), (8 bytes).
+    Removing rwip_driver.o(i.radio_freq_cal_from_trim), (48 bytes).
+    Removing rwip_driver.o(i.radio_hse_mco_set), (152 bytes).
+    Removing rwip_driver.o(i.radio_read_trim_mac_address), (80 bytes).
+    Removing rwip_driver.o(i.radio_read_trim_mco_freq), (68 bytes).
+    Removing rwip_driver.o(i.rf_tx_power_set), (124 bytes).
+    Removing prf.o(.emb_text), (8 bytes).
+    Removing prf.o(i.prf_cleanup), (92 bytes).
+    Removing prf.o(i.prf_create), (92 bytes).
+    Removing prf.o(i.prf_src_task_get), (16 bytes).
+    Removing prf_utils.o(.emb_text), (8 bytes).
+    Removing prf_utils.o(i.prf_pack_date_time), (32 bytes).
+    Removing prf_utils.o(i.prf_unpack_date_time), (34 bytes).
+    Removing diss.o(.emb_text), (8 bytes).
+    Removing diss.o(i.diss_compute_cfg_flag), (40 bytes).
+    Removing diss_task.o(.emb_text), (8 bytes).
+    Removing bass.o(.emb_text), (8 bytes).
+    Removing bass_task.o(.emb_text), (8 bytes).
+    Removing rdtss.o(.emb_text), (8 bytes).
+    Removing rdtss_task.o(.emb_text), (8 bytes).
+    Removing rdts_common.o(.emb_text), (8 bytes).
+    Removing ns_log_lpuart.o(.emb_text), (8 bytes).
+    Removing ns_log_lpuart.o(i.GPIO_Configuration), (44 bytes).
+    Removing ns_log_lpuart.o(i.RCC_Configuration), (36 bytes).
+    Removing ns_log_lpuart.o(i.ns_log_lpuart_deinit), (2 bytes).
+    Removing ns_sleep.o(.emb_text), (8 bytes).
+    Removing ns_sleep.o(i.app_sleep_prepare_proc), (2 bytes).
+    Removing ns_sleep.o(i.app_sleep_resume_proc), (2 bytes).
+    Removing ns_sleep.o(i.entry_idle), (40 bytes).
+    Removing ns_error.o(i.error_handler), (32 bytes).
+    Removing ns_error.o(.bss), (12 bytes).
+    Removing ns_timer.o(.emb_text), (8 bytes).
+    Removing ns_timer.o(i.ns_timer_cancel), (76 bytes).
+    Removing ns_timer.o(i.ns_timer_cancel_all), (96 bytes).
+    Removing ns_timer.o(i.ns_timer_create), (64 bytes).
+    Removing ns_timer.o(i.ns_timer_modify), (96 bytes).
+    Removing ns_sec.o(.emb_text), (8 bytes).
+    Removing ns_sec.o(i.ns_bond_last_bonded_addr), (48 bytes).
+    Removing ns_sec.o(i.ns_sec_bond_db_erase_all), (20 bytes).
+    Removing ns_sec.o(i.ns_sec_pincode_respond), (64 bytes).
+    Removing ns_sec.o(i.ns_sec_send_bond_start), (64 bytes).
+    Removing ns_sec.o(i.ns_sec_send_encrypt_req), (220 bytes).
+    Removing ns_sec.o(i.ns_sec_send_security_req), (40 bytes).
+    Removing ns_ble.o(.emb_text), (8 bytes).
+    Removing ns_ble.o(i.ns_ble_active_rssi), (44 bytes).
+    Removing ns_ble.o(i.ns_ble_adv_data_set), (80 bytes).
+    Removing ns_ble.o(i.ns_ble_create_init), (52 bytes).
+    Removing ns_ble.o(i.ns_ble_create_scan), (52 bytes).
+    Removing ns_ble.o(i.ns_ble_dle_set), (48 bytes).
+    Removing ns_ble.o(i.ns_ble_ex_adv_data_set), (60 bytes).
+    Removing ns_ble.o(i.ns_ble_get_active_connection), (12 bytes).
+    Removing ns_ble.o(i.ns_ble_get_conidx_by_role), (56 bytes).
+    Removing ns_ble.o(i.ns_ble_get_connection_state), (32 bytes).
+    Removing ns_ble.o(i.ns_ble_get_peer_info), (40 bytes).
+    Removing ns_ble.o(i.ns_ble_list_set_wl), (72 bytes).
+    Removing ns_ble.o(i.ns_ble_master_connection_num), (48 bytes).
+    Removing ns_ble.o(i.ns_ble_mtu_set), (52 bytes).
+    Removing ns_ble.o(i.ns_ble_phy_set), (56 bytes).
+    Removing ns_ble.o(i.ns_ble_prod_test_cmd_send), (92 bytes).
+    Removing ns_ble.o(i.ns_ble_radio_calibration), (44 bytes).
+    Removing ns_ble.o(i.ns_ble_radio_power_set), (8 bytes).
+    Removing ns_ble.o(i.ns_ble_resolv_addr), (64 bytes).
+    Removing ns_ble.o(i.ns_ble_scan_init), (28 bytes).
+    Removing ns_ble.o(i.ns_ble_scan_rsp_data_set), (68 bytes).
+    Removing ns_ble.o(i.ns_ble_set_active_connection), (12 bytes).
+    Removing ns_ble.o(i.ns_ble_set_channel_map), (44 bytes).
+    Removing ns_ble.o(i.ns_ble_set_slave_latency), (44 bytes).
+    Removing ns_ble.o(i.ns_ble_slave_connection_num), (48 bytes).
+    Removing ns_ble.o(i.ns_iwdg_reload), (76 bytes).
+    Removing ns_ble_task.o(.emb_text), (8 bytes).
+    Removing app_dis.o(.emb_text), (8 bytes).
+    Removing app_dis.o(i.app_dis_init), (48 bytes).
+    Removing app_batt.o(.emb_text), (8 bytes).
+    Removing app_rdtss.o(.emb_text), (8 bytes).
+    Removing app_rdtss.o(i.app_rdtss_init), (48 bytes).
+    Removing app_ble.o(.emb_text), (8 bytes).
+    Removing app_ble.o(i.app_ble_connected), (24 bytes).
+    Removing app_ble.o(i.app_ble_disconnected), (28 bytes).
+    Removing app_ble.o(i.app_ble_prf_init), (24 bytes).
+    Removing main.o(.emb_text), (8 bytes).
+    Removing app_usart.o(.emb_text), (8 bytes).
+    Removing app_usart.o(i.GPIO_Configuration_USART), (56 bytes).
+    Removing app_usart.o(i.NVIC_Configuration), (56 bytes).
+    Removing app_usart.o(i.RCC_Configuration_USART), (28 bytes).
+    Removing app_usart.o(i.usart_tx_data_blocking), (40 bytes).
+    Removing app_gpio.o(.emb_text), (8 bytes).
+    Removing app_gpio.o(i.LedBlink), (8 bytes).
+    Removing fadd.o(.text), (178 bytes).
+    Removing dadd.o(.text), (360 bytes).
+    Removing ddiv.o(.text), (240 bytes).
+    Removing fflti.o(.text), (22 bytes).
+    Removing ffixui.o(.text), (40 bytes).
+    Removing f2d.o(.text), (40 bytes).
+    Removing d2f.o(.text), (56 bytes).
+    Removing depilogue.o(.text), (190 bytes).
+    Removing dmul.o(.text), (208 bytes).
+    Removing dfixul.o(.text), (64 bytes).
+    Removing cdrcmple.o(.text), (40 bytes).
+    Removing rwip_driver.o(i.co_max), (8 bytes).
+    Removing rwip_driver.o(i.__ARM_common_ll_muluu), (50 bytes).
+    Removing rwip_driver.o(i.__ARM_common_memcpy1_6), (26 bytes).
+    Removing ns_sec.o(i.co_rand_word), (8 bytes).
+    Removing ns_ble.o(i.__ARM_common_memcpy1_5), (22 bytes).
+    Removing depilogue.o(i.__ARM_clz), (46 bytes).
+
+380 unused section(s) (total 13522 bytes) removed from the image.

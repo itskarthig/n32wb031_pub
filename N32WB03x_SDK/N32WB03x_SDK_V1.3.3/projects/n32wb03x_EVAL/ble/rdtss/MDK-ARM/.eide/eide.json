@@ -1,0 +1,740 @@
+{
+  "name": "rdtss",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "STARTUP",
+        "files": [
+          {
+            "path": "../../../../../firmware/CMSIS/device/startup/startup_n32wb03x_gcc.s"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "CMSIS",
+        "files": [
+          {
+            "path": "../../../../../firmware/CMSIS/device/system_n32wb03x.c"
+          },
+          {
+            "path": "../../../../../firmware/CMSIS/device/system_delay.s"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "FWLB",
+        "files": [
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/misc.c"
+          },
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/n32wb03x_adc.c"
+          },
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/n32wb03x_crc.c"
+          },
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/n32wb03x_dma.c"
+          },
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/n32wb03x_exti.c"
+          },
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/n32wb03x_gpio.c"
+          },
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/n32wb03x_rcc.c"
+          },
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/n32wb03x_tim.c"
+          },
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/n32wb03x_usart.c"
+          },
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/n32wb03x_spi.c"
+          },
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/n32wb03x_lpuart.c"
+          },
+          {
+            "path": "../../../../../firmware/n32wb03x_std_periph_driver/src/n32wb03x_qflash.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "BLE_STACK",
+        "files": [
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/src/att/lib_att.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/stack_common/rwip.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/stack_common/rwip_driver.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "BLE_PROFILE",
+        "files": [
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/prf.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/prf_utils.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/dis/diss/src/diss.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/dis/diss/src/diss_task.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/bas/bass/src/bass.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/bas/bass/src/bass_task.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/rdts/rdtss/src/rdtss.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/rdts/rdtss/src/rdtss_task.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/rdts/rdts_common.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/ns_ius/ns_iuss/src/ns_iuss.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/ns_ius/ns_iuss/src/ns_iuss_task.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "NS_DFU",
+        "files": [
+          {
+            "path": "../../../dfu/common/dfu_crc.c"
+          },
+          {
+            "path": "../../../dfu/common/dfu_delay.c"
+          },
+          {
+            "path": "../../../dfu/common/dfu_led.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/dfu/ns_dfu_ble.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/dfu/ns_dfu_boot.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Crypto",
+        "files": [
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/ecc/ns_ecc.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/ecc/sha256.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/ecc/uECC.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "NS_LIB",
+        "files": [
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/log/ns_log_lpuart.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/sleep/ns_sleep.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/error/ns_error.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/timer/ns_timer.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/sec/ns_sec.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/ble/ns_ble.c"
+          },
+          {
+            "path": "../../../../../middlewares/Nationstech/ble_library/ns_library/ble/ns_ble_task.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "BLE_APP",
+        "files": [
+          {
+            "path": "../src/app_profile/app_dis.c"
+          },
+          {
+            "path": "../src/app_profile/app_batt.c"
+          },
+          {
+            "path": "../src/app_profile/app_rdtss.c"
+          },
+          {
+            "path": "../src/app_profile/app_ns_ius.c"
+          },
+          {
+            "path": "../src/app_ble.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "USER",
+        "files": [
+          {
+            "path": "../src/main.c"
+          },
+          {
+            "path": "../src/app_usart.c"
+          },
+          {
+            "path": "../src/app_gpio.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "CONFIG",
+        "files": [
+          {
+            "path": "../inc/app_user_config.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "DOC",
+        "files": [],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": "N32WB031",
+  "packDir": ".pack/Nationstech/N32WB03X_DFP.1.1.0",
+  "miscInfo": {
+    "uid": "c7fd1cb9dec6623f22ecdeec56bf6b21"
+  },
+  "targets": {
+    "N32WB03x": {
+      "excludeList": [
+        "<virtual_root>/BLE_PROFILE/ns_iuss.c",
+        "<virtual_root>/BLE_PROFILE/ns_iuss_task.c",
+        "<virtual_root>/NS_DFU",
+        "<virtual_root>/Crypto",
+        "<virtual_root>/BLE_APP/app_ns_ius.c"
+      ],
+      "toolchain": "GCC",
+      "compileConfig": {
+        "cpuType": "Cortex-M0",
+        "floatingPointHardware": "none",
+        "scatterFilePath": "D:\\N32WB03x_SDK_V1.3.3\\firmware\\CMSIS\\device\\n32wb03x_flash.ld",
+        "useCustomScatterFile": true,
+        "storageLayout": {
+          "RAM": [],
+          "ROM": []
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": "",
+        "baseAddr": "",
+        "cpuInfo": {
+          "vendor": "Nationstech",
+          "cpuName": "N32WB031KEQ6-2"
+        },
+        "proType": 1,
+        "speed": 4000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "../inc",
+          "../../../../../firmware/CMSIS/core",
+          "../../../../../firmware/CMSIS/device",
+          "../../../../../firmware/n32wb03x_std_periph_driver/inc",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/dis/diss/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/bas/bass/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/bas/bass/src",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/hogp",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/hogp/hogpd/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/hogp/hogpd/src",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/rdts",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/rdts/rdtss/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ahi/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/inc",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/src/gap",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/src/gatt",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/src/l2c",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src/llc",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src/lld",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src/llm",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/em/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/hci/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/sch/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/aes/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/common/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/dbg/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/ecc_p256/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/h4tl/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/ke/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/rwip/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/rfinit/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/arch",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/common/src",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/stack_common",
+          "../inc/rw",
+          "../inc/app_profile",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/adv",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/timer",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/log",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/delay",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/sleep",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/sec",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/ble",
+          ".cmsis/include",
+          "RTE/_N32WB03x"
+        ],
+        "libList": [],
+        "defineList": [
+          "N32WB03X",
+          "USE_STDPERIPH_DRIVER",
+          "N32WB03x"
+        ]
+      }
+    },
+    "OTA_IMG_1": {
+      "compileConfig": {
+        "cpuType": "Cortex-M0",
+        "floatingPointHardware": "none",
+        "scatterFilePath": "",
+        "useCustomScatterFile": false,
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "RAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20004000",
+                "size": "0x8000"
+              },
+              "isChecked": true,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "ROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x1004000",
+                "size": "0x1c000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            },
+            {
+              "tag": "IROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": "",
+        "baseAddr": "",
+        "cpuInfo": {
+          "vendor": "null",
+          "cpuName": "null"
+        },
+        "proType": 1,
+        "speed": 8000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "toolchain": "AC5",
+      "custom_dep": {
+        "name": "default",
+        "sourceDirList": [],
+        "libList": [],
+        "incList": [
+          "../inc",
+          "../../../../../firmware/CMSIS/core",
+          "../../../../../firmware/CMSIS/device",
+          "../../../../../firmware/n32wb03x_std_periph_driver/inc",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/dis/diss/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/bas/bass/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/hogp",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/hogp/hogpd/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/hogp/hogpd/src",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/rdts",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/rdts/rdtss/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/ns_ius/ns_iuss/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ahi/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/inc",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/src/gap",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/src/gatt",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/src/l2c",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src/llc",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src/lld",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src/llm",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/em/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/hci/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/sch/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/aes/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/common/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/dbg/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/ecc_p256/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/h4tl/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/ke/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/rwip/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/rfinit/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/arch",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/common/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/common/src",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/stack_common",
+          "../inc/rw",
+          "../inc/app_profile",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/arch",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/adv",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/timer",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/log",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/delay",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/sleep",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/error",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/ecc",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/dfu",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/sec",
+          "../../../dfu/common",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/ble",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/bas/bass/src",
+          ".cmsis/include",
+          "RTE/_OTA_IMG_1"
+        ],
+        "defineList": [
+          "N32WB03X",
+          "USE_STDPERIPH_DRIVER",
+          "APPLICATION",
+          "BLE_OTA_ENABLE"
+        ]
+      },
+      "excludeList": []
+    },
+    "OTA_IMG_2": {
+      "compileConfig": {
+        "cpuType": "Cortex-M0",
+        "floatingPointHardware": "none",
+        "scatterFilePath": "",
+        "useCustomScatterFile": false,
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "RAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20004000",
+                "size": "0x8000"
+              },
+              "isChecked": true,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "ROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x1020000",
+                "size": "0x1c000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            },
+            {
+              "tag": "IROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": "",
+        "baseAddr": "",
+        "cpuInfo": {
+          "vendor": "null",
+          "cpuName": "null"
+        },
+        "proType": 1,
+        "speed": 8000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "toolchain": "AC5",
+      "custom_dep": {
+        "name": "default",
+        "sourceDirList": [],
+        "libList": [],
+        "incList": [
+          "../inc",
+          "../../../../../firmware/CMSIS/core",
+          "../../../../../firmware/CMSIS/device",
+          "../../../../../firmware/n32wb03x_std_periph_driver/inc",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/dis/diss/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/bas/bass/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/hogp",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/hogp/hogpd/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/hogp/hogpd/src",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/rdts",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/rdts/rdtss/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/ns_ius/ns_iuss/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ahi/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/inc",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/src/gap",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/src/gatt",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/hl/src/l2c",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src/llc",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src/lld",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/ble/ll/src/llm",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/em/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/hci/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/ip/sch/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/aes/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/common/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/dbg/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/ecc_p256/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/h4tl/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/ke/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/rwip/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/rfinit/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/arch",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/common/api",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/modules/common/src",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/stack_common",
+          "../inc/rw",
+          "../inc/app_profile",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_stack/arch",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/adv",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/timer",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/log",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/delay",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/sleep",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/error",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/ecc",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/dfu",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/sec",
+          "../../../dfu/common",
+          "../../../../../middlewares/Nationstech/ble_library/ns_library/ble",
+          "../../../../../middlewares/Nationstech/ble_library/ns_ble_profile/bas/bass/src",
+          ".cmsis/include",
+          "RTE/_OTA_IMG_2"
+        ],
+        "defineList": [
+          "N32WB03X",
+          "USE_STDPERIPH_DRIVER",
+          "APPLICATION",
+          "BLE_OTA_ENABLE"
+        ]
+      },
+      "excludeList": []
+    }
+  },
+  "version": "3.4"
+}

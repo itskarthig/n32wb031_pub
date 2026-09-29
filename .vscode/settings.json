@@ -1,0 +1,91 @@
+{
+    //  Tool paths (cross-platform)
+    //
+    // No GCC_PATH override here: cmake/toolchain-gcc.cmake auto-detects the
+    // arm-none-eabi-gcc toolchain itself (via PATH on macOS/Linux, falling
+    // back to the Windows default install path on Windows) unless GCC_PATH
+    // is explicitly passed -- so this file doesn't need to hardcode a path
+    // for either OS. Pass -DGCC_PATH=<dir> here only if your toolchain isn't
+    // on PATH and isn't at the Windows default location.
+    //
+    // cmake.cmakePath is left as the bare command name so the CMake Tools
+    // extension resolves it via PATH on whichever OS you're on (Homebrew
+    // puts `cmake` on PATH on macOS; the Windows CMake installer offers to
+    // add it to PATH too). Override to an absolute path here if `cmake`
+    // isn't on your PATH.
+    "cmake.cmakePath": "cmake",
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.sourceDirectory": "${workspaceFolder}",
+
+    // cmake.configureSettings: passed through as ordinary -D<KEY>=<VALUE>
+    // CMake cache variables whenever the CMake Tools extension configures --
+    // same standard mechanism as e.g. github.com/Lora-net/LoRaMac-node's own
+    // .vscode/settings.json. Both entries are commented out by default since
+    // auto-detect already works (see the no-override note above); uncomment
+    // and fill in only if it doesn't on your machine. Independent of, and
+    // does not affect, the terminal `make` workflow's own GCC_BIN/OPENOCD
+    // auto-detect+override logic (Makefile) -- these two paths are separate,
+    // parallel build entry points that don't share a config file.
+    "cmake.configureSettings": {
+        // GCC_PATH: ARM GCC toolchain bin directory (contains
+        // arm-none-eabi-gcc). Already the live variable
+        // cmake/toolchain-gcc.cmake reads -- fill in only if the toolchain
+        // isn't on PATH (macOS/Linux) or at the Windows default location:
+        //   macOS (Homebrew) : /opt/homebrew/bin
+        //   Linux            : /usr/bin
+        //   Windows          : C:/tools/GNU Arm Embedded Toolchain/10 2021.10/bin
+        "GCC_PATH": "/opt/homebrew/bin",
+
+        // NINJA: path to the ninja executable, used as CMake's generator.
+        // Only needed when ninja isn't already on PATH (the common case on
+        // Windows, where there's no standard install location the way
+        // GCC_PATH/OPENOCD_BIN have one). Read by the Makefile the same way
+        // as GCC_PATH/OPENOCD_BIN -- falls back to a bare "ninja" PATH
+        // lookup if unset here.
+        // "NINJA": "C:/tools/ninja-win/ninja.exe",
+
+        // OPENOCD_BIN: path to the openocd executable, used for flashing.
+        // Declared as a real CACHE variable in the root CMakeLists.txt.
+        // Fill in only if openocd isn't found automatically (xPack install
+        // glob on macOS/Linux, falls back to `openocd` on PATH):
+        //   macOS (xPack) : ~/Library/xPacks/@xpack-dev-tools/openocd/<ver>/.content/bin/openocd
+        //   Linux         : /usr/bin/openocd
+        //   Windows       : C:/xpack/xpack-openocd-0.12.0-7-win32-x64/xpack-openocd-0.12.0-7/bin/openocd.exe
+        "OPENOCD_BIN": "/Users/karthig/Library/xPacks/@xpack-dev-tools/openocd/0.12.0-7.1/.content/bin/openocd",
+
+        // SDK_ROOT: path to the N32WB03x SDK tree to build against, relative
+        // to this settings.json file (i.e. .vscode/ -- ".." reaches the repo
+        // root). Declared as a real CACHE variable (N32WB03X_SDK_ROOT) in the
+        // root CMakeLists.txt -- CMake no longer derives this path itself
+        // from a "V133"/"V200" shorthand; there is exactly one SDK path for
+        // the whole repo. Switch SDK versions by editing this one value and
+        // rebuilding. Unlike GCC_PATH/OPENOCD_BIN (absolute, machine-
+        // specific), this is relative, so the same literal value works in
+        // every clone/copy of this repo.
+        "SDK_ROOT": "../N32WB03x_SDK/N32WB03x_SDK_V2.0.0",
+
+        // BOARD / CATEGORY / PROJECT: which project `make build`/`make flash`
+        // act on -- the literal Projects/<BOARD>/Applications/<CATEGORY>/
+        // <PROJECT> path segments. Run `make list-projects` to see every
+        // legal <CATEGORY> <Project> <TARGET> triple (with its board family
+        // in brackets) before changing these. With these set, the command
+        // itself only needs the target: `make build INSTALLER|APP|ALL`,
+        // `make flash INSTALLER|APP|ALL` -- switch which project you're
+        // building by editing these three values, not the command line.
+        "BOARD": "N32WB03x_EVAL",
+        "CATEGORY": "BLE",
+        "PROJECT": "P2PS_OTA",
+
+        // PROBE / BUILD: same `make build`/`make flash` defaults as before
+        // (dap/release), just settings.json-sourced now instead of only a
+        // Makefile default -- still overridable per-invocation, e.g.
+        // `make build APP BUILD=debug`.
+        "PROBE": "dap",
+        "BUILD": "release"
+    }
+
+    //  IntelliSense
+    // c_cpp_properties.json defines two configurations, "Mac" and "Win32",
+    // each with its own compilerPath -- the C/C++ extension auto-selects the
+    // one matching your OS, so no default compilerPath is needed here.
+}
