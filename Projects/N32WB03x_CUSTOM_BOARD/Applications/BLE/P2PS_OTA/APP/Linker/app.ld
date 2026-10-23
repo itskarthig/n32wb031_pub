@@ -28,7 +28,7 @@ MEMORY
     FLASH   (rx)  : ORIGIN = 0x01004000, LENGTH = 240K
     RAM     (xrw) : ORIGIN = 0x20004000, LENGTH = 0x7F80  /* 32640 B — BLE ROM area reserved below */
     NVM_RAM (rw)  : ORIGIN = 0x2000BF80, LENGTH = 128     /* .noinit — survives NRST while VDD held */
-    USER_CFG (r)  : ORIGIN = 0x0107E000, LENGTH = 8K      /* userConfig_t — accessed via Qflash API */
+    USER_CFG (r)  : ORIGIN = 0x01003000, LENGTH = 4K      /* userConfig_t — accessed via Qflash API; see FLASH_ALLOCATION.md */
 }
 
 SECTIONS

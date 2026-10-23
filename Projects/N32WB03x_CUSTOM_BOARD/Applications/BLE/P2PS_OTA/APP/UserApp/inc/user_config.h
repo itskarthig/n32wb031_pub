@@ -5,8 +5,8 @@
 
 #define USER_CFG_MAGIC 0xA5C3E1F7UL
 #define USER_CFG_VERSION 13U
-#define USER_CFG_FLASH_ADDR 0x0107E000UL /* top 8 KB of flash */
-#define USER_CFG_FLASH_SIZE 0x2000U      /* 8 KB = 2 × 4 KB sectors */
+#define USER_CFG_FLASH_ADDR 0x01003000UL /* App Data sector, Bank A -- see FLASH_ALLOCATION.md */
+#define USER_CFG_FLASH_SIZE 0x1000U      /* 4 KB = 1 sector */
 #define FIRMWARE_VERSION_BCD 0x0100U      /* BCD: 0x0100 = V1.00 */
 #define HARDWARE_VERSION_BCD 0x0103U      /* BCD: 0x0103 = V1.3 */
 #define DEVICE_TYPE_BCD 0x7700U          /* BCD: 0x7700 = 77.00 P2PS Device*/

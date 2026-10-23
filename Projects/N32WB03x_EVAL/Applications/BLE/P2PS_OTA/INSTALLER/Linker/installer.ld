@@ -4,7 +4,7 @@
  * Flash layout:
  *   0x01000000  8 KB   app_installer (this image)
  *   0x01002000  4 KB   InstallFlag_t (written by app_fuota, read by installer via Qflash_Read)
- *   0x01003000  4 KB   App data (NVM)
+ *   0x01003000  4 KB   userConfig_t (see FLASH_ALLOCATION.md; 0x0107E000 now free)
  *   0x01004000  240 KB APP1
  *   0x01040000  240 KB APP2 (FUOTA Download Slot)
  *
