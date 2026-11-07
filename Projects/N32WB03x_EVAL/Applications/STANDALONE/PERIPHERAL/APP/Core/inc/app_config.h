@@ -31,6 +31,7 @@ typedef enum
     TASK_PERIODIC_ID,
     TASK_PULSE_COUNTER_ID,
     TASK_WAKE_WINDOW_ID,
+    TASK_RTC_TIMER_SVC,     /* timer_if.c -- runs UTIL_TIMER_IRQ_Handler() + the WUT one-shot/early-fire re-arm in task context (RTC_IRQHandler only sets this task) */
     TASK_NBR
 } SeqTaskId_t;
 

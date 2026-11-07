@@ -51,8 +51,10 @@ static uint32_t SystimeIf_GetCalendarTime(uint16_t *subSeconds)
     struct tm calendar_tm;
     uint32_t raw_subsec;
 
-    APP_RTC_GetDateTime(&date, &time);
-    raw_subsec = RTC_GetSubSecond();
+    /* Coherent SUBS -> TSH -> DATE snapshot (User Manual S20.3.11) -- the old
+     * TSH -> DATE -> SUBS order could mix two shadow snapshots across a second
+     * rollover (~1000 ms step). See rtc.c / CLAUDE.md timer audit 2026-11-06. */
+    APP_RTC_GetDateTimeSubSec(&date, &time, &raw_subsec);
 
     memset(&calendar_tm, 0, sizeof(calendar_tm));
     calendar_tm.tm_year = (int)date.Year + 100;

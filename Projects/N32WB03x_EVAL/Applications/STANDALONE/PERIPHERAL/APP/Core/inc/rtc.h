@@ -52,6 +52,37 @@ ErrorStatus APP_RTC_SetDateTime(const RTC_DateType *date, const RTC_TimeType *ti
  */
 void APP_RTC_GetDateTime(RTC_DateType *date, RTC_TimeType *time);
 
+/**
+ * @brief Read date, time AND raw RTC_SUBS as one coherent snapshot.
+ *
+ * User Manual S20.3.11: "reading RTC_SUBS or RTC_TSH will lock the value in
+ * the high-order calendar shadow register until RTC_DATE is read" -- so the
+ * only order that yields a consistent triple is SUBS -> TSH -> DATE. The old
+ * pattern (APP_RTC_GetDateTime() followed by RTC_GetSubSecond()) read
+ * TSH -> DATE -> (new snapshot) SUBS, so a second rollover between the two
+ * snapshots made the result jump back ~1000 ms (CLAUDE.md, timer audit
+ * 2026-11-06, finding 2). RTC_GetSubSecond() itself is NOT used here: it reads
+ * DATE right after SUBS ("to unfreeze"), which is the wrong place.
+ *
+ * The triple is read twice and compared (TSH/DATE equal and SUBS not
+ * increased -- SUBS counts down within a second); up to 3 attempts. After
+ * that the first read is returned (never blocks).
+ *
+ * @param subsec  raw RTC_SUBS value (counts DIVS..0 within a second).
+ */
+void APP_RTC_GetDateTimeSubSec(RTC_DateType *date, RTC_TimeType *time, uint32_t *subsec);
+
+/**
+ * @brief Re-synchronise the calendar shadow registers after a low-power wake.
+ *
+ * User Manual S20.3.11: "After waking up from low-power mode, RSYF must be
+ * cleared by software. Software must then wait until RSYF is set again before
+ * reading RTC_SUBS, RTC_TSH and RTC_DATE" (shadow registers are not refreshed
+ * in Standby/Sleep, S20.3.3). Bounded (SDK SYNCHRO_TIMEOUT). Call once per
+ * wake, before the first calendar read.
+ */
+void APP_RTC_ResyncAfterWake(void);
+
 #ifdef __cplusplus
 }
 #endif

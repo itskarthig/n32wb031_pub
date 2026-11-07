@@ -29,8 +29,24 @@ const user_config_t UserConfig_Default = {
 
 int User_Config_Load(user_config_t *dst)
 {
+    /* Read through a word-aligned scratch buffer whose length is rounded up
+     * to a multiple of 4, then copy exactly sizeof(*dst) out of it.
+     * Qflash_Read()'s underlying ROM routine (CMD_FLASH_READ) transfers in
+     * word granularity: given a non-multiple-of-4 length it rounds up and
+     * writes the extra byte(s) past the end of the destination. When dst is
+     * application.c's static s_cfg, whatever .bss global follows it gets
+     * clobbered -- this was hardware-confirmed in LORAWAN_WMBUS_AMR
+     * (s_cfg 63 B, s_first_boot immediately after it: every boot read
+     * erased-flash 0xFF into s_first_boot and wiped the LoRaWAN NVM) and
+     * earlier in LORAWAN. Reading via a rounded-up scratch buffer makes this
+     * immune to any future change of sizeof(user_config_t), with no
+     * struct/flash-layout change (no USER_CFG_VERSION bump needed). See
+     * CLAUDE.md LORAWAN_WMBUS_AMR section. */
+    uint8_t tmp[(sizeof(user_config_t) + 3U) & ~3U] __attribute__((aligned(4)));
+
     Qflash_Init();
-    Qflash_Read(USER_CFG_FLASH_ADDR, (uint8_t *)dst, sizeof(*dst));
+    Qflash_Read(USER_CFG_FLASH_ADDR, tmp, sizeof(tmp));
+    memcpy(dst, tmp, sizeof(*dst));
     dst->firmware_version = FIRMWARE_VERSION_BCD; /* always use current firmware version */
     dst->hardware_version = HARDWARE_VERSION_BCD; /* always use current hardware version */
     if (dst->magic != USER_CFG_MAGIC || dst->version != USER_CFG_VERSION)

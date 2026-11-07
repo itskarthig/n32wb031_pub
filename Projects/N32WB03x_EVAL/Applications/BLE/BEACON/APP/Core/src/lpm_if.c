@@ -57,6 +57,7 @@
 #include "n32_lpm.h"
 #include "n32wb03x.h"
 #include "trace_if.h"
+#include "rtc.h"        /* APP_RTC_ResyncAfterWake() -- see LpmIf_ExitStopMode() */
 #include "app_config.h" /* CFG_LPM_UART_TX_Id -- see LpmIf_ExitStopMode()'s force-release */
 
 /* Genuine ROM function (resolved via symbol_g15.txt, exactly like
@@ -133,6 +134,13 @@ static void LpmIf_EnterStopMode(void)
      * correct. Re-arming here, before __WFI(), makes every wake source
      * genuinely live during the sleep itself, matching the reference. */
     EXTI->IMASK |= (EXTI_LINE1 | EXTI_LINE3 | EXTI_LINE9);
+
+    /* User Manual S20.3.3 / S20.3.11: the calendar shadow registers
+     * (RTC_SUBS/TSH/DATE) are NOT refreshed in Sleep/Standby; "after waking up
+     * from low-power mode, RSYF must be cleared by software ... then wait until
+     * RSYF is set again before reading". Bounded (~2 RTCCLK = 61 us typical).
+     * See CLAUDE.md timer audit 2026-11-06, finding 2. */
+    APP_RTC_ResyncAfterWake();
 
     while (PWR->CR1 & PWR_CR1_OSC_EN)
     {

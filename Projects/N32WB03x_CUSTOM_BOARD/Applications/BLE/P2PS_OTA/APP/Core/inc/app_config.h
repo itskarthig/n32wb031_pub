@@ -42,6 +42,7 @@ typedef enum
     TASK_FUOTA_WORK,             /* app_fuota.c -- deferred flash erase/write/finish, outside kernel context */
     TASK_BLE_STACK_ID,           /* app_ble.c -- BLE pump (rwip_schedule), CFG_SEQ_Prio_1, self-perpetuating */
     TASK_NS_LOG_DRAIN_ID,        /* ns_log_if.c -- drains one deferred NS_LOG_x message per pump cycle into APP_LOG(), spreading the BLE SDK's own bursty NS_LOG_DEBUG sequences out instead of contending for the shared trace FIFO all at once (see ns_log_if.h) */
+    TASK_RTC_TIMER_SVC,     /* timer_if.c -- runs UTIL_TIMER_IRQ_Handler() + the WUT one-shot/early-fire re-arm in task context (RTC_IRQHandler only sets this task) */
     TASK_NBR
 } SeqTaskId_t;
 

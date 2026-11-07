@@ -136,3 +136,50 @@ void APP_RTC_GetDateTime(RTC_DateType *date, RTC_TimeType *time)
     RTC_GetTime(RTC_FORMAT_BIN, time);
     RTC_GetDate(RTC_FORMAT_BIN, date);
 }
+
+void APP_RTC_GetDateTimeSubSec(RTC_DateType *date, RTC_TimeType *time, uint32_t *subsec)
+{
+    RTC_DateType date2;
+    RTC_TimeType time2;
+    uint32_t     sub1;
+    uint32_t     sub2;
+    uint32_t     attempts = 3U;
+
+    for (;;)
+    {
+        /* SUBS first: locks TSH/DATE in the same shadow snapshot until DATE
+         * is read (User Manual S20.3.11). Raw register read -- RTC_GetSubSecond()
+         * would read DATE immediately and unfreeze too early. */
+        sub1 = RTC->SUBS;
+        RTC_GetTime(RTC_FORMAT_BIN, time);
+        RTC_GetDate(RTC_FORMAT_BIN, date);
+
+        sub2 = RTC->SUBS;
+        RTC_GetTime(RTC_FORMAT_BIN, &time2);
+        RTC_GetDate(RTC_FORMAT_BIN, &date2);
+
+        /* Same second (TSH/DATE identical) and SUBS has not gone UP (it counts
+         * down inside a second; going up means it reloaded = a rollover fell
+         * between the two reads). */
+        if ((time->Hours == time2.Hours) && (time->Minutes == time2.Minutes) &&
+            (time->Seconds == time2.Seconds) && (date->Date == date2.Date) &&
+            (date->Month == date2.Month) && (date->Year == date2.Year) &&
+            (sub2 <= sub1))
+        {
+            break;
+        }
+
+        if (--attempts == 0U)
+        {
+            break; /* give up: return the first (SUBS-locked) triple, never block */
+        }
+    }
+
+    *subsec = sub1;
+}
+
+void APP_RTC_ResyncAfterWake(void)
+{
+    /* SDK: unlock, clear RSYF, bounded poll for RSYF, relock. */
+    (void)RTC_WaitForSynchro();
+}
