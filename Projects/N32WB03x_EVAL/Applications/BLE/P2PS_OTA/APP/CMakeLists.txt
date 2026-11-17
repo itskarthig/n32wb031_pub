@@ -61,6 +61,9 @@ set(APP_SOURCES
     # Peripheral driver needed by lpm_if.c (PWR_EnterIDLE/SLEEP/PDMode)
     "${SDK}/firmware/n32wb03x_std_periph_driver/src/n32wb03x_pwr.c"
 
+    # Peripheral driver needed by iwdg_if.c (independent hardware watchdog, IWDG_ENABLE in app_config.h)
+    "${SDK}/firmware/n32wb03x_std_periph_driver/src/n32wb03x_iwdg.c"
+
     # Peripheral driver needed by adc.c
     "${SDK}/firmware/n32wb03x_std_periph_driver/src/n32wb03x_adc.c"
 
@@ -142,6 +145,9 @@ set(APP_SOURCES
 
     # Project-local LPM hardware interface (bridges n32_lpm to PWR_Enter*Mode)
     "${APP_CORE_SRC}/lpm_if.c"
+
+    # Project-local independent hardware watchdog (IWDG_ENABLE in app_config.h, default 0)
+    "${APP_CORE_SRC}/iwdg_if.c"
 
     # Project-local ADC driver (internal VREF/VCC voltage + die temperature)
     "${APP_CORE_SRC}/adc.c"

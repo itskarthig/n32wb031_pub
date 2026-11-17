@@ -57,7 +57,7 @@ typedef enum
     CFG_LPM_APPLI_Id,       /* app_entry.c -- permanent OffMode block, and StopMode block under LOW_POWER_DISABLE */
     CFG_LPM_UART_TX_Id,     /* trace UART TX -- blocks StopMode while bytes are in flight */
     CFG_LPM_WAKE_BUTTON_Id, /* PB3 wake button / boot -- blocks StopMode for a 60 s reflash window, see application.c */
-    CFG_LPM_BLE_Id,         /* app_ble.c -- blocks StopMode during FAST_ADV/CONNECTED; StopMode only entered when rwip_sleep() agrees, see APP_BLE_ProcessTask() */
+    CFG_LPM_BLE_Id,         /* app_ble.c -- UNUSED since the vendor-shaped sleep pump (rwip_sleep() alone governs BLE sleeping); slot kept so the voter bit numbers below do not move */
     CFG_LPM_FUOTA_Id,       /* app_fuota.c -- blocks StopMode for the duration of an active FUOTA transfer (write-without-response has no retransmit) */
     CFG_LPM_NBR
 } LpmVoterId_t;
@@ -75,6 +75,38 @@ typedef enum
  */
 #ifndef LOW_POWER_DISABLE
 #define LOW_POWER_DISABLE  0
+#endif
+
+/**
+ * @brief Independent hardware watchdog (iwdg_if.c). 1 = enabled, 0 = compiled out entirely (default 0 here: the code is present but dormant; validated with 1
+ * on LORAWAN_WMBUS_AMR_V20).
+ *
+ * Catches what no software watchdog can: a hang under PRIMASK=1 (the two PWR_CR1.BLE_OSC_EN waits in
+ * lpm_if.c) or a WFI that is never woken. Fed once per BLE pump pass (app_ble.c), so a dead pump or a
+ * hung CPU ends in a reset. The board is NVM-backed (LoRaWAN context, config), so recovery is quick.
+ * app_env.iwdg_cycle (the vendor's own IWDG option) must stay 0, see iwdg_if.h.
+ */
+#ifndef IWDG_ENABLE
+#define IWDG_ENABLE  0
+#endif
+
+/**
+ * @brief IWDG timeout in ms (nominal, 32 kHz LSI at /256 = 8 ms per count). Maximum is about 32760 ms
+ * (reload 0xFFF); larger values are clamped. Must exceed the longest legitimate gap between BLE pump passes: normal wake cadence is
+ * about 1 s, FUOTA's 60-sector flash erase blocks the pump for about 6 s.
+ */
+#ifndef IWDG_TIMEOUT_MS
+#define IWDG_TIMEOUT_MS  26000U
+#endif
+
+/**
+ * @brief One-off experiment, keep 0 in normal builds. 1 = about 30 s after boot enter deep Sleep with PB3
+ * as the only wake source and the BB wake pushed out to ~36 h, to learn whether the IWDG keeps counting in
+ * deep Sleep (board resets after IWDG_TIMEOUT_MS = yes; stays asleep until PB3 = no). Reset the board
+ * after the experiment. Only meaningful with IWDG_ENABLE 1.
+ */
+#ifndef IWDG_SELFTEST
+#define IWDG_SELFTEST  0
 #endif
 
 #ifdef __cplusplus

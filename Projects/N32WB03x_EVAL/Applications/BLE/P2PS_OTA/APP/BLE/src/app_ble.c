@@ -75,6 +75,12 @@
  * to us now and that's fine -- always consults rwip_sleep() as the sole
  * authority, entering real StopMode (UTIL_LPM_EnterLowPower(), still
  * lpm_if.c's unchanged entry_sleep()-faithful sequence) only when it agrees.
+ *
+ * 2026-11-17 UPDATE -- the StopMode-gating paragraphs above (BLE voter, app_env.adv_mode polling, RW_DEEP_SLEEP
+ * stuck-latch watchdog, TraceIf_Flush before sleep) describe a superseded design. APP_BLE_ProcessTask() is now the
+ * vendor rwip_schedule()/ns_sleep() shape validated for 87 h on LORAWAN_WMBUS_AMR_V20: one PRIMASK section,
+ * rwip_sleep() consulted in every BLE state (no BLE voter), vendor post-wake fix-up afterwards. See CLAUDE.md
+ * "V20 sleep path ported to the other projects".
  */
 
 #include "n32wb03x.h"
@@ -93,18 +99,20 @@
 #include "app_config.h"
 #include "rwip.h"
 #include "rwip_int.h" /* rwip_env / RW_DEEP_SLEEP -- see file header */
+#include "lpm_if.h"    /* LpmIf_EntryIdle() */
+#include "ke_event.h"  /* ke_event_set() -- post-wake KE timer re-arm */
+#include "co_utils.h"  /* CLK_DIFF */
+#include "iwdg_if.h"   /* IwdgIf_Feed() -- hardware watchdog, see app_config.h IWDG_ENABLE */
 #include "trace_if.h" /* TraceIf_Flush() -- see the rwip_sleep() call site below */
 
 /**
- * @brief BLE state visible to APP_BLE_ProcessTask(), drives CFG_LPM_BLE_Id.
- * Shape mirrors app_ble_lorawan_wmbus/app_entry.h's APP_BLE_State_t.
- * FAST_ADV is reachable -- set from app_env.adv_mode polling in
- * APP_BLE_ProcessTask() below, and as an event-driven companion from
- * APP_BLE_AdvMsgHandler() (see file header) -- SLOW_ADV is never assigned
- * separately, folding into IDLE (APP_BLE_SetState()'s own switch already
- * treats them identically: voter ENABLE). CONNECTED: BLE link active, WFI
- * CI-pacing required -> STOP blocked. Everything else: STOP allowed, gated
- * purely by rwip_sleep().
+ * @brief BLE connection state (IsConnected() only; no LPM voter -- rwip_sleep() governs sleeping).
+ * Shape mirrors app_ble_lorawan_wmbus/app_entry.h's APP_BLE_State_t, but only
+ * IDLE and CONNECTED are ever actually assigned in this project -- FAST_ADV/
+ * SLOW_ADV are kept for shape-parity with the reference but unreachable here,
+ * since the SDK callback that would set them is confirmed dead (see file
+ * header). CONNECTED: BLE link active, WFI CI-pacing required -> STOP
+ * blocked. Everything else: STOP allowed, gated purely by rwip_sleep().
  */
 typedef enum
 {
@@ -115,34 +123,10 @@ typedef enum
 } APP_BLE_State_t;
 
 static volatile APP_BLE_State_t s_ble_state = APP_BLE_STATE_IDLE;
-static uint16_t s_deepsleep_stuck_ctr = 0U;
-
-/* [LPM] diagnostic log state -- ported from app_ble_cellular_wmbus's
- * ble_pump_task() (ns_sleep()/rwip_sleep() visibility was previously omitted
- * when this function was first ported; added to investigate an elevated
- * sleep-current report with no other code-level cause found -- see the
- * plan/CLAUDE.md history for this round). */
-static uint16_t s_sleep_ctr = 0U;
-static uint8_t s_last_sleep = 0xFFU;
-
 /* Forces a disconnect after BLE_SESSION_TIMEOUT_SEC (user_config.h) of an
  * open connection -- ported from app_ble_cellular_wmbus's app_ble.c, fully
  * generic (bounds how long an authenticated P2PS session can stay open). */
 static UTIL_TIMER_Object_t s_ble_session_timer;
-
-/* APP_BLE_AdvMsgHandler diagnostic: records every invocation via pure RAM
- * writes (safe from any context, including BLE-kernel dispatch) instead of
- * relying solely on the synchronous APP_LOG() call already inside the
- * handler. Proved the callback fires for FAST/SLOW/STOP alike while the
- * synchronous log silently drops most invocations (see file header,
- * "CORRECTION"). Indexed by enum app_adv_mode (IDLE=0, ENABLE=1,
- * DIRECTED=2, FAST=3, SLOW=4, STOP=5); sized 8 for headroom, out-of-range
- * writes clamp to the last slot rather than corrupting memory. Drained and
- * printed from APP_BLE_ProcessTask() (already proven-safe APP_LOG()
- * context) on the next pump cycle after a new call is recorded. */
-static volatile uint32_t s_adv_msg_call_count = 0U;
-static volatile uint32_t s_adv_msg_mode_count[8] = {0};
-static uint32_t s_adv_msg_reported_count = 0U;
 
 static void APP_BLE_GapParamsInit(void);
 static void APP_BLE_SecInit(void);
@@ -240,212 +224,105 @@ static void APP_BLE_SessionTimeoutTask(void)
     ns_ble_disconnect();
 }
 
+/* Iteration budget of the vendor's post-wake wait (ns_sleep.c "2*800us"). */
+#define POST_WAKE_WAIT_ITERS 12800U
+
 /**
- * @brief BLE pump task -- self-perpetuating, see file header for why. Pumps
- * the BLE host+link-layer kernel event queue, then makes the BLE-aware sleep
- * decision for this pass -- ported from app_ble_lorawan_wmbus/
- * app_ble_cellular_wmbus's proven ble_pump_task() (see file header for why
- * this project's earlier unconditional UTIL_LPM_EnterLowPower() call was
- * wrong) -- then re-arms itself.
+ * @brief ns_sleep() step 5 (vendor ns_library/sleep/ns_sleep.c), run with interrupts enabled.
+ * (a) While a BB sleep cycle is still completing (WAKE_UP_ONGOING|DEEP_SLEEP set) spin, bounded, so
+ *     the BLE_SLP / slot ISRs it waits for can run. (b) Vendor fix V1.3.0 #18: if the 1 ms kernel
+ *     timer target expired while the BB slept, force KE_EVENT_KE_TIMER (that compare IRQ can be missed).
+ */
+static void APP_BLE_PostWakeFixup(void)
+{
+    volatile uint16_t *const p_prevent = (volatile uint16_t *)&rwip_env.prevent_sleep;
+    uint32_t n = POST_WAKE_WAIT_ITERS;
+
+    while (((*p_prevent) & (RW_WAKE_UP_ONGOING | RW_DEEP_SLEEP)) != 0U)
+    {
+        if (--n == 0U)
+        {
+            break;
+        }
+    }
+
+    const uint32_t target_hs = rwip_env.timer_1ms_target.hs;
+    if (target_hs != RWIP_INVALID_TARGET_TIME)
+    {
+        const rwip_time_t now = rwip_time_get();
+        if (CLK_DIFF(now.hs, target_hs) < 0)
+        {
+            ke_event_set(KE_EVENT_KE_TIMER);
+        }
+    }
+}
+
+/**
+ * @brief BLE pump task, vendor shape: rwip_schedule(); ns_sleep();
+ *
+ * ns_sleep() equivalent, in ONE PRIMASK section so that "may we sleep?" and "enter sleep" cannot be
+ * separated by an interrupt (no flush window, no commit-then-decline):
+ *   - app voters (UART TX in flight, wake window, FUOTA, LOW_POWER_DISABLE) block sleeping entirely:
+ *     rwip_sleep() is NOT called (it commits RW_DEEP_SLEEP + the BB wake-up as a side effect), plain WFI.
+ *   - otherwise rwip_sleep() decides, in EVERY BLE state (FAST_ADV / CONNECTED included, as the OEM
+ *     examples do -- no BLE voter): DEEP_SLEEP -> BB + MCU deep sleep (LpmIf_EnterStopMode via the LPM
+ *     engine), CPU_SLEEP -> entry_idle(), ACTIVE -> nothing (loop again).
+ * After PRIMASK is restored the vendor post-wake step runs (APP_BLE_PostWakeFixup()).
+ * No trace flush: a trace TX in flight holds the UART_TX voter, which keeps us out of deep sleep.
  */
 static void APP_BLE_ProcessTask(void)
 {
+    IwdgIf_SelfTestPoll(); /* no-op unless IWDG_SELFTEST */
+
     rwip_schedule();
 
-    /* Defensive re-arm, every cycle, unconditionally -- matches
-     * app_ble_cellular_wmbus's ble_pump_task() exactly ("belt-and-
-     * suspenders" per its own comment there). A third, independent re-arm
-     * site alongside the two already inside lpm_if.c's LpmIf_EnterStopMode()/
-     * ExitStopMode() -- those only run during an actual StopMode transition,
-     * so they can't protect EXTI->IMASK from being cleared/corrupted by
-     * anything happening outside that narrow window (e.g. while this task
-     * is spending a cycle in the CONNECTED branch below, which never
-     * touches lpm_if.c at all). */
-    EXTI->IMASK |= (EXTI_LINE1 | EXTI_LINE3 | EXTI_LINE9);
+    uint32_t primask;
+    __asm volatile("mrs %0, primask\n\tcpsid i" : "=r"(primask) : : "memory");
 
-    /* Deferred-print drain for APP_BLE_AdvMsgHandler's call recorder --
-     * APP_LOG() here runs in the same proven-safe task context already used
-     * for the [LPM] diagnostics below, ruling out the "synchronous log call
-     * inside the BLE-kernel-dispatch callback silently fails" hypothesis.
-     * See the static state's own comment (top of file) for full context. */
-    if (s_adv_msg_call_count != s_adv_msg_reported_count)
+    bool slept = false;
+    if (UTIL_LPM_GetMode() == UTIL_LPM_STOPMODE)
     {
-        s_adv_msg_reported_count = s_adv_msg_call_count;
-        APP_LOG(TS_OFF, VLEVEL_M,
-                "[BLE] AdvMsgHandler DEFERRED: total=%lu IDLE=%lu ENABLE=%lu DIRECTED=%lu FAST=%lu SLOW=%lu STOP=%lu\r\n",
-                (unsigned long)s_adv_msg_call_count,
-                (unsigned long)s_adv_msg_mode_count[APP_ADV_MODE_IDLE],
-                (unsigned long)s_adv_msg_mode_count[APP_ADV_MODE_ENABLE],
-                (unsigned long)s_adv_msg_mode_count[APP_ADV_MODE_DIRECTED],
-                (unsigned long)s_adv_msg_mode_count[APP_ADV_MODE_FAST],
-                (unsigned long)s_adv_msg_mode_count[APP_ADV_MODE_SLOW],
-                (unsigned long)s_adv_msg_mode_count[APP_ADV_MODE_STOP]);
-    }
-
-    /* Sync FAST_ADV/IDLE from app_env.adv_mode (SDK's own public global,
-     * ns_ble.h) each cycle. Skipped entirely while CONNECTED: that
-     * transition is driven by the real, reliable APP_BLE_MsgHandler()
-     * connect/disconnect signal and must not be second-guessed by
-     * adv_mode, which can read a stale FAST/SLOW value for a cycle or two
-     * around a fresh connection. SLOW_ADV/other modes all fold into IDLE
-     * here -- APP_BLE_SetState()'s own switch already treats SLOW_ADV and
-     * IDLE identically (voter ENABLE), so no finer distinction is needed
-     * for behavior, only FAST_ADV is a distinct bucket (voter DISABLE,
-     * WFI-only, matching CONNECTED -- see APP_BLE_SetState()'s existing
-     * switch-case). Ported from LORAWAN/APP's identical fix -- see
-     * CLAUDE.md LORAWAN section, "s_ble_state never actually reached
-     * APP_BLE_STATE_FAST_ADV" -- this file's own header comment above
-     * argued rwip_sleep() alone is sufficient and no app-level hint is
-     * needed; kept for consistency with the sibling projects regardless. */
-    if (s_ble_state != APP_BLE_STATE_CONNECTED)
-    {
-        APP_BLE_State_t adv_derived_state = (app_env.adv_mode == APP_ADV_MODE_FAST)
-                                                 ? APP_BLE_STATE_FAST_ADV
-                                                 : APP_BLE_STATE_IDLE;
-        if (adv_derived_state != s_ble_state)
+        switch (rwip_sleep())
         {
-            APP_BLE_SetState(adv_derived_state);
+            case RWIP_DEEP_SLEEP:
+                UTIL_LPM_EnterLowPower(); /* voters unchanged under PRIMASK -> STOPMODE tier */
+                slept = true;
+                break;
+            case RWIP_CPU_SLEEP:
+                LpmIf_EntryIdle();
+                slept = true;
+                break;
+            default: /* RWIP_ACTIVE: kernel has work, go round again */
+                break;
         }
-    }
-
-    if (s_ble_state == APP_BLE_STATE_CONNECTED || s_ble_state == APP_BLE_STATE_FAST_ADV)
-    {
-        /* STOP already blocked via CFG_LPM_BLE_Id -- calling rwip_sleep()
-         * here would set RW_DEEP_SLEEP while we cannot complete a real BLE
-         * hardware sleep cycle, latching it. Plain WFI for CI pacing. */
-        __WFI();
     }
     else
     {
-        uint32_t primask_saved;
-        __asm volatile("MRS %0, PRIMASK" : "=r"(primask_saved));
-        __asm volatile("CPSID I");
+        __WFI();
+    }
 
-        if (UTIL_LPM_GetMode() == UTIL_LPM_STOPMODE)
-        {
-            /* Second, independent guarantee (on top of the CFG_LPM_UART_TX_Id
-             * voter above) that the trace UART is genuinely idle before any
-             * StopMode decision is made -- mirrors the proven old-structure
-             * app_ble_cellular_wmbus/app_ble_lorawan_wmbus ble_pump_task()
-             * exactly: temporarily restore PRIMASK so the TX-complete ISR can
-             * actually run and drain the FIFO while this spins, then re-mask
-             * before proceeding. Ported from LORAWAN/APP's identical fix --
-             * see trace_if.h's TraceIf_Flush() doc comment and CLAUDE.md
-             * LORAWAN section ("garbled trace UART output" investigation)
-             * for why the voter alone was not sufficient there. */
-            __asm volatile("MSR PRIMASK, %0" : : "r"(primask_saved));
-            TraceIf_Flush();
-            __asm volatile("CPSID I");
+    __asm volatile("msr primask, %0" : : "r"(primask) : "memory");
 
-            /* Voter allows STOP -- now safe to ask the BLE kernel itself
-             * whether it is actually ready for a real hardware sleep cycle. */
-            uint8_t sleep_type = rwip_sleep();
+    /* Hardware watchdog feed: once per pump pass, i.e. after every wake. Only the pump feeds (not timers
+     * or ISRs), so a dead pump or a hang in the sleep sequence cannot be hidden. */
+    IwdgIf_Feed();
 
-            /* RW_DEEP_SLEEP (0x0008) stuck-latch watchdog -- normally cleared
-             * by rwip_wakeup() after the BLE HW sleep cycle completes. If the
-             * BLE wakeup IRQ is ever missed, it stays set forever and every
-             * later rwip_sleep() call returns RWIP_CPU_SLEEP permanently.
-             * Force-clear after ~30 ms of that state (10 iterations). */
-            if (((sleep_type == RWIP_CPU_SLEEP) || (sleep_type == RWIP_ACTIVE))
-                && (rwip_env.prevent_sleep & RW_DEEP_SLEEP))
-            {
-                if (++s_deepsleep_stuck_ctr >= 10U)
-                {
-                    s_deepsleep_stuck_ctr = 0U;
-                    rwip_prevent_sleep_clear(RW_DEEP_SLEEP);
-                    /* Commented out -- serial log flood. Uncomment for LPM/BLE
-                     * sleep debugging if the stuck-latch watchdog needs tracing. */
-                    // APP_LOG(TS_OFF, VLEVEL_M, "[BLE] cleared stuck RW_DEEP_SLEEP prev=0x%04x\r\n",
-                    //         (unsigned)rwip_env.prevent_sleep);
-                }
-            }
-            else
-            {
-                s_deepsleep_stuck_ctr = 0U;
-            }
-
-            if (sleep_type == RWIP_DEEP_SLEEP)
-            {
-                /* Both voter and BLE kernel agree: real StopMode. */
-                UTIL_LPM_EnterLowPower();
-            }
-            else
-            {
-                /* BLE kernel not ready yet -- light WFI only. */
-                __WFI();
-            }
-
-            /* Restore PRIMASK HERE, immediately after the sleep decision --
-             * matches app_ble_cellular_wmbus's ble_pump_task() exactly.
-             * Deliberately NOT a single shared restore after the whole
-             * if/else (as this function had before): the [LPM] diagnostic
-             * log below calls APP_LOG(), which starts an interrupt-driven
-             * trace UART TX via PreSendHook() -- with PRIMASK still 1, that
-             * TX's completion interrupt cannot be serviced. During the
-             * rwip_sleep()==2/1 alternation this log fires on *every*
-             * cycle (sleep_type always differs from the previous one),
-             * hitting that race far more often than the rare, occasional
-             * case CFG_LPM_UART_TX_Id's force-release (LpmIf_ExitStopMode())
-             * and the stuck-latch watchdog above were sized for -- confirmed
-             * on hardware: StopMode logging stopped permanently within ~3 s
-             * of the wake window expiring, current never dropping. */
-            __asm volatile("MSR PRIMASK, %0" : : "r"(primask_saved));
-
-            /* [LPM] diagnostic: log on first call in a new sleep_type, or
-             * every 200 calls -- see the static state's comment above for why. */
-            if ((sleep_type != s_last_sleep) || (++s_sleep_ctr >= 200U))
-            {
-                s_last_sleep = sleep_type;
-                s_sleep_ctr = 0U;
-                /* Commented out -- serial log flood. Uncomment for LPM/BLE
-                 * sleep debugging. */
-                // APP_LOG(TS_OFF, VLEVEL_M,
-                //         "[LPM] rwip_sleep=%d lpm=%d state=%d prev=0x%04x\r\n",
-                //         (int)sleep_type, (int)UTIL_LPM_GetMode(),
-                //         (int)s_ble_state, (unsigned)rwip_env.prevent_sleep);
-            }
-        }
-        else
-        {
-            /* Voter blocks STOP (FAST_ADV/CONNECTED already handled above --
-             * this covers e.g. the 60 s wake window). Plain WFI, no
-             * rwip_sleep() call. Restore PRIMASK immediately after, matching
-             * the reference -- see the comment above for why this can't be
-             * a single shared restore after the whole if/else. */
-            __WFI();
-            __asm volatile("MSR PRIMASK, %0" : : "r"(primask_saved));
-        }
+    if (slept)
+    {
+        APP_BLE_PostWakeFixup();
     }
 
     UTIL_SEQ_SetTask((1U << TASK_BLE_STACK_ID), CFG_SEQ_Prio_1);
 }
 
 /**
- * @brief Update BLE state and the CFG_LPM_BLE_Id StopMode voter accordingly.
+ * @brief Update BLE state.
  * See the enum's own doc comment and the file header for the rationale.
  */
 static void APP_BLE_SetState(APP_BLE_State_t state)
 {
+    /* OEM model: no BLE StopMode voter -- rwip_sleep() alone governs sleeping in every BLE state. */
     s_ble_state = state;
-    s_deepsleep_stuck_ctr = 0U;
-    s_last_sleep = 0xFFU; /* force a [LPM] diagnostic log on the first pump cycle in the new state */
-    s_sleep_ctr = 0U;
-
-    switch (state)
-    {
-        case APP_BLE_STATE_FAST_ADV:
-        case APP_BLE_STATE_CONNECTED:
-            UTIL_LPM_SetStopMode((1U << CFG_LPM_BLE_Id), UTIL_LPM_DISABLE);
-            break;
-
-        case APP_BLE_STATE_SLOW_ADV:
-        case APP_BLE_STATE_IDLE:
-            UTIL_LPM_SetStopMode((1U << CFG_LPM_BLE_Id), UTIL_LPM_ENABLE);
-            break;
-
-        default:
-            break;
-    }
 }
 
 static void APP_BLE_GapParamsInit(void)
@@ -603,45 +480,16 @@ static void APP_BLE_UserMsgHandler(ke_msg_id_t const msgid, void const *p_param)
 
 /**
  * @brief Registered as ns_adv_params_t.ble_adv_msg_handler. Correctly wired
- * and structurally reachable -- see the file header's CORRECTION (the
- * earlier "dead code" claim checked the wrong file; the real call site is
- * ns_ble_task.c's gapm_cmp_evt_handler). Hardware-confirmed genuinely
- * firing (see file header). Deliberately does NOT drive the CFG_LPM_BLE_Id
- * voter directly (only APP_BLE_SetState() does that) -- see
- * APP_BLE_ProcessTask()/file header for why rwip_sleep() alone is trusted
- * as the StopMode authority regardless of whether this callback fires.
+ * and structurally reachable -- see the file header's 2026-09-27 correction
+ * (the earlier "dead code" claim checked the wrong file; the real call site
+ * is ns_ble_task.c's gapm_cmp_evt_handler). Whether it actually fires on
+ * this hardware has not been re-verified since that correction. Deliberately
+ * does NOT drive any LPM voter -- see APP_BLE_ProcessTask()/file header for
+ * why rwip_sleep() alone is trusted for that regardless of whether this
+ * callback fires.
  */
 static void APP_BLE_AdvMsgHandler(enum app_adv_mode adv_mode)
 {
-    /* Unconditional, every invocation -- the switch below only prints for
-     * FAST/SLOW/STOP; if adv_mode is DIRECTED or some other value it falls
-     * through to default: break with zero output, indistinguishable from
-     * the callback never having been called at all. */
-    APP_LOG(TS_OFF, VLEVEL_M, "[BLE] AdvMsgHandler \r\n");
-
-    /* Deferred-print recording -- pure RAM writes, safe from any context.
-     * See the static state's own comment for why. */
-    {
-        uint8_t idx = ((uint8_t)adv_mode < 8U) ? (uint8_t)adv_mode : 7U;
-        s_adv_msg_mode_count[idx]++;
-        s_adv_msg_call_count++;
-    }
-
-    /* Event-driven companion to APP_BLE_ProcessTask()'s app_env.adv_mode
-     * polling above -- not a replacement. The polling loop's own
-     * `if (adv_derived_state != s_ble_state)` guard means this call and the
-     * poll's own call naturally de-duplicate; if this callback's dispatch
-     * ever became unreliable again, the poll alone still keeps s_ble_state
-     * correct, unchanged from today. Never overrides CONNECTED, mirroring
-     * the polling loop's own documented reason exactly. APP_LOG()-free
-     * inside APP_BLE_SetState() itself -- safe to call from this
-     * BLE-kernel-dispatch context (pure RAM writes + voter bitmask
-     * update). */
-    if (s_ble_state != APP_BLE_STATE_CONNECTED)
-    {
-        APP_BLE_SetState((adv_mode == APP_ADV_MODE_FAST) ? APP_BLE_STATE_FAST_ADV : APP_BLE_STATE_IDLE);
-    }
-
     switch (adv_mode)
     {
         case APP_ADV_MODE_FAST:

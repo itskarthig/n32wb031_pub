@@ -9,11 +9,16 @@
 #include "gpio.h"
 #include "n32_lpm.h"
 #include "app_config.h"
+#include "iwdg_if.h"
 #include "app_ble.h"
 #include "nvm_ram.h"
 
 void APP_Init(void)
 {
+     /* Remember whether this reset came from the IWDG before anything can clear the flag (the vendor's
+      * ns_peripheral_config() clears RCC_CTRLSTS' reset flags when BLE initialises). No-op unless IWDG_ENABLE. */
+     IwdgIf_CaptureResetCause();
+
    /* SystemInit() (called from Reset_Handler before main()) unconditionally
       * sets PWR->VTOR_REG = 0x81000000, pointing the active interrupt-vector
       * table at P2PS_OTA_CB_INSTALLER's base (0x01000000) -- since installer
@@ -81,7 +86,7 @@ void APP_Init(void)
      APP_GPIO_WakeButtonInit();
 
      /* OffMode resets the MCU on wake (see lpm_if.c) -- permanently block it
-      * so UTIL_LPM_EnterLowPower() (called from UTIL_SEQ_Idle() below) never
+      * so UTIL_LPM_EnterLowPower() (called from APP_BLE_ProcessTask()'s sleep decision, app_ble.c) never
       * picks it by default. StopMode stays allowed unless a voter (e.g.
       * CFG_LPM_UART_TX_Id, see PreSendHook/PostSendHook below) blocks it. */
      UTIL_LPM_Init();
@@ -94,11 +99,10 @@ void APP_Init(void)
 
      UserApp_Init();
 
-     /* CFG_LPM_BLE_Id needs no boot-time init -- an unset voter bit already
-      * means "not blocking" (see n32_lpm.c), which is correct before any BLE
-      * connection exists. APP_BLE_SetState() (app_ble.c) sets/clears it purely
-      * on CONNECTED/DISCONNECTED from here on; see app_ble.c's file header for
-      * why FAST_ADV/SLOW_ADV are deliberately not tracked at the voter level. */
+     /* Hardware watchdog (IWDG_ENABLE, default 0): after UserApp_Init() and before APP_BLE_Init(). Fed from the
+      * BLE pump (app_ble.c). */
+     IwdgIf_Init();
+
      APP_BLE_Init();
 }
 
@@ -117,12 +121,19 @@ void UTIL_SEQ_PreIdle( void )
 
 void UTIL_SEQ_Idle( void )
 {
-    /* Reachable only before APP_BLE_Init() arms TASK_BLE_STACK_ID (app_ble.c)
-     * -- once that self-perpetuating task is pending, UTIL_SEQ_Run() never
-     * finds the sequencer empty again, and the sleep decision happens inside
-     * APP_BLE_ProcessTask() instead (see app_ble.c's file header for why).
-     * Harmless to keep calling here too either way. */
-    UTIL_LPM_EnterLowPower();
+    /* Unreachable once APP_BLE_Init() has armed TASK_BLE_STACK_ID (app_ble.c):
+     * that self-perpetuating task is always pending again when UTIL_SEQ_Run()
+     * re-reads the task set, so the sequencer never finds itself empty, and the
+     * sleep decision lives in APP_BLE_ProcessTask() (see app_ble.c's file header).
+     *
+     * It must NOT call UTIL_LPM_EnterLowPower() (it used to): that would enter
+     * LpmIf_EnterStopMode() without rwip_sleep()'s agreement, i.e. with the BLE
+     * baseband never told to sleep, and the unbounded `while (BLE_OSC_EN)` wait
+     * would then spin forever under PRIMASK=1 -- a total freeze at ~1.2 mA
+     * (CLAUDE.md LORAWAN_WMBUS_AMR, sleep-path audit 2026-11-10, F5.2). A plain
+     * WFI is the only thing that is ever safe here (PRIMASK is 1: it wakes on
+     * any pending IRQ and the sequencer then re-evaluates). */
+    __WFI();
 }
 
 /* UTIL_ADV_TRACE_PreSendHook()/PostSendHook() are weak in n32_adv_trace.c,
